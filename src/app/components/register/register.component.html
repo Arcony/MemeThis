@@ -1,0 +1,7 @@
+<form [formGroup]="createForm" >
+<input type="text" placeholder="email" name="email" formControlName="email" #email/>
+<input type="text" placeholder="password" name="password" formControlName="password" #password />
+<input type="text" placeholder="username" name="username" formControlName="username" #username/>
+
+<button type="submit" (click)="ValidForm(email.value, password.value, username.value)" > Valider </button>
+</form>

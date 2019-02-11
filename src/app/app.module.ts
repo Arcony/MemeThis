@@ -9,17 +9,22 @@ import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, 
 import { RouterModule, Routes, CanActivate} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './components/register/register.component';
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'register', component: RegisterComponent},
+  { path: '', redirectTo: 'login', pathMatch: 'full'}
+
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

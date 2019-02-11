@@ -1,21 +1,15 @@
 <div>
   <br>
-  <mat-card>
-    <section classs="mat-typography">
+    <section>
       <h3> Login </h3>
+      <button mat-raised-button color="primary" (click)="signUp()"> Register </button>
+
       </section>
-    <mat-divider></mat-divider>
     <br>
     <form [formGroup]="createForm" class="create-form">
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Mail" formControlName="login" #login>
-        </mat-form-field>
-      <mat-form-field class="field-full-width">
-        <input matInput placeholder="Password" formControlName="password" #password>
-        </mat-form-field>
+        <input  placeholder="Mail" formControlName="login" #login>
+        <input  placeholder="Password" formControlName="password" #password>
       </form>
-      <mat-divider></mat-divider>
       <br><br>
-      <button type="submit" mat-raised-button color="primary" (click)="fetchUsers(login.value, password.value)"> Valider </button>
-    </mat-card>
+      <button type="submit" mat-raised-button color="primary" (click)="signIn(login.value, password.value)"> Valider </button>
 </div>
