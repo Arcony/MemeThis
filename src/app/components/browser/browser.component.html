@@ -1,0 +1,4 @@
+<div *ngFor="let item of posts">
+<a routerLink="/post/{{item._id}}"><p>{{item.title}} </p>
+<img [src] = "'http://127.0.0.1:8887' + item.content"></a>
+</div>

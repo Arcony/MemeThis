@@ -1,15 +1,18 @@
-<div>
-  <br>
-    <section>
-      <h3> Login </h3>
-      <button mat-raised-button color="primary" (click)="signUp()"> Register </button>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
 
-      </section>
-    <br>
-    <form [formGroup]="createForm" class="create-form">
-        <input  placeholder="Mail" formControlName="login" #login>
-        <input  placeholder="Password" formControlName="password" #password>
-      </form>
-      <br><br>
-      <button type="submit" mat-raised-button color="primary" (click)="signIn(login.value, password.value)"> Valider </button>
+
+      <div class="fadeIn first">
+          <img src="" id="icon" alt="User Icon" />
+      </div>
+        <form [formGroup]="createForm" >
+          <input type="text" #email id="email" formControlName="email" class="fadeIn second" name="email" placeholder="email">
+          <input type="password" #password id="password" formControlName="password" class="fadeIn third" name="password" placeholder="password">
+          <input type="submit" class="fadeIn fourth" value="Log In" (click)="signIn(email.value, password.value)">
+        </form>
+        <div id="formFooter">
+          <a class="underlineHover" (click)="signUp()">Register</a>
+        </div>
+    
+  </div>
 </div>

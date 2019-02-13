@@ -10,11 +10,18 @@ import { RouterModule, Routes, CanActivate} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
+import { BrowserComponent } from './components/browser/browser.component';
+import { AuthGuard } from './auth.guard';
+import { PostComponent } from './components/post/post.component';
+import { CanvasComponent } from './components/canvas/canvas.component';
+
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
+  { path: 'browser', component: BrowserComponent, canActivate: [AuthGuard]},
+  { path: 'post/:id', component: PostComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: 'login', pathMatch: 'full'}
 
 ];
@@ -24,7 +31,10 @@ const routes: Routes = [
     AppComponent,
     NavComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BrowserComponent,
+    PostComponent,
+    CanvasComponent
   ],
   imports: [
     BrowserModule,

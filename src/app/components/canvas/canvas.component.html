@@ -1,0 +1,10 @@
+
+<canvas #canvas ></canvas>
+<input type="text" placeholder="top" name="top" #top  size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
+<input type="text" placeholder="bot" name="bot" #bot    size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
+<input type="text" placeholder="title" name="title" #title    size="55" maxlength="55"/>
+<input type="text" placeholder="tag" name="tag" #tag    size="5" maxlength="5" oninput="this.value = this.value.toUpperCase()" />
+
+<button type="submit" (click)="drawOnCanvas(this.top.value ,this.bot.value )" > Generate </button>
+<button type="submit" (click)="postCanvas(this.title.value,this.tag.value)" > Post this Meme </button>
+

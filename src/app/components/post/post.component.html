@@ -1,0 +1,12 @@
+<div>
+  <p> {{post?.title}} </p>
+  <img [src] = "'http://127.0.0.1:8887' + post?.content">
+</div>
+
+
+<app-canvas *ngIf="postContent" (messageEvent)="receiveMessage($event)" [postContent]="postContent" [postId]="postId"></app-canvas>
+
+<div  *ngFor="let item of memes" >
+  <p> {{item.title}} </p>
+  <img [src] = "'http://127.0.0.1:8887' + item.content">
+</div>

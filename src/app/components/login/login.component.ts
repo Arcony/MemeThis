@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model'
+import { Meme } from '../../models/meme.model'
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -26,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   signUp() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['register']);
   }
   
   signIn( email , password ) {
@@ -44,7 +47,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token',this.user.token);
       localStorage.setItem('username',this.user.username);
       if(this.user.token != null)
-        console.log("OK");
+        this.router.navigate(['browser']);
     });
     
   }
