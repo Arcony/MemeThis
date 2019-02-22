@@ -15,6 +15,7 @@ a {
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
+  cursor: pointer;
 }
 
 h2 {
@@ -259,4 +260,9 @@ input[type=text]:placeholder {
 
 #icon {
   width:60%;
+}
+
+.error-txt {
+  margin-top: 10px;
+  color: red;
 }

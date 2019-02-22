@@ -24,18 +24,25 @@ export class BrowserComponent implements OnInit {
   posts : Post[];
   post : Post;
 
-  constructor(private router: Router, private postService: PostService) { }
+  constructor(private router: Router, private postService: PostService,) { }
 
   ngOnInit() {
-
     this.fetchPosts();
   }
 
   fetchPosts() {
     this.postService
-    .getPosts()
+    .getPostsAndMemes()
     .subscribe((data: Post[] ) =>{
         this.posts = data;
+    });
+  }
+
+  countPostMemes(postId) {
+    this.postService
+    .countPostMemes(postId)
+    .subscribe((data: string ) =>{
+        return data;
     });
   }
 

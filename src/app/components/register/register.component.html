@@ -1,7 +1,22 @@
-<form [formGroup]="createForm" >
-<input type="text" placeholder="email" name="email" formControlName="email" #email/>
-<input type="text" placeholder="password" name="password" formControlName="password" #password />
-<input type="text" placeholder="username" name="username" formControlName="username" #username/>
 
-<button type="submit" (click)="ValidForm(email.value, password.value, username.value)" > Valider </button>
-</form>
+<div class="wrapper fadeInDown">
+        <div id="formContent">
+      
+      
+            <div class="fadeIn first">
+                <img style="max-height:50px;max-width:50px;"src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_TV_2015.png/280px-Logo_TV_2015.png" id="icon" alt="User Icon" />
+            </div>
+              <form [formGroup]="createForm" >
+                <input type="text" #email id="email" formControlName="email" class="fadeIn second" name="email" placeholder="email"  oninput="this.value = this.value.toLowerCase()">
+                <input type="password" #password id="password" formControlName="password" class="fadeIn third" name="password" placeholder="password">
+                <input type="text" class="fadeIn third" placeholder="username" name="username" formControlName="username" #username/>
+                <input type="submit" class="fadeIn fourth" value="Valider" (click)="ValidForm(email.value, password.value, username.value)">
+                <p class="error-txt">{{errorMsg}}</p>
+              </form>
+              <div id="formFooter">
+                <a class="underlineHover" (click)="toLoginPage()">Login</a>
+              </div>
+          
+        </div>
+      </div>
+      

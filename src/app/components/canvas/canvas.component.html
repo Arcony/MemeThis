@@ -1,10 +1,15 @@
-
+<div class="row">
+<div class="col-md-6">
 <canvas #canvas ></canvas>
-<input type="text" placeholder="top" name="top" #top  size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
-<input type="text" placeholder="bot" name="bot" #bot    size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
-<input type="text" placeholder="title" name="title" #title    size="55" maxlength="55"/>
-<input type="text" placeholder="tag" name="tag" #tag    size="5" maxlength="5" oninput="this.value = this.value.toUpperCase()" />
-
-<button type="submit" (click)="drawOnCanvas(this.top.value ,this.bot.value )" > Generate </button>
-<button type="submit" (click)="postCanvas(this.title.value,this.tag.value)" > Post this Meme </button>
-
+</div>
+<div class="col-md-6">
+<input  class="form-control space-top" type="text" placeholder="Top Text" name="top" #top  size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
+<input class="form-control space-top" type="text" placeholder="Bottom Text" name="bot" #bot    size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
+<input class="form-control space-top"type="text" placeholder="Title of your meme" name="title" #title    size="55" maxlength="55"/>
+<input class="form-control space-top" type="text" placeholder="Tag" name="tag" #tag    size="5" maxlength="5" oninput="this.value = this.value.toUpperCase()" />
+<br>
+<button class="btn btn-info" type="submit" (click)="drawOnCanvas(this.top.value ,this.bot.value )" > Generate </button>
+<button  class="btn btn-info margin-left" type="submit" (click)="postCanvas(this.title.value,this.tag.value, this.top.value ,this.bot.value)" > Post this Meme </button>
+<p class="error-txt" *ngIf="errorMsg"> {{errorMsg}}</p>
+</div>
+</div>

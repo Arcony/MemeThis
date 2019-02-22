@@ -1,0 +1,51 @@
+<div class="col-md-6 card text-center bg-dark">
+    <div class="card-header bg-dark text-white">
+        <p>Profil de {{userFetch?.username}} </p>
+    </div>
+        <div class="card-body text-white">
+            <div class="row">
+              <div class="col-md-6"> <p>Avatar</p> <img class="img-responsive img" [src] = "'http://127.0.0.1:8887' + userFetch?.picture"></div>
+              <div class="col-md-6"> Informations 
+                  <form class="form-group margin-top" >
+                      <input type="text" #oldPassword id="oldPassword" class="fadeIn second" name="oldPassword" placeholder="Old password">
+                      <input type="text" #newPassword id="newPassword"  class="fadeIn second" name="newPassword" placeholder="Write new password">
+                      <input type="text" #newPasswordBis id="newPasswordBis"  class="fadeIn second" name="newPasswordBis" placeholder="Write new password">
+                      <hr />
+                      <p> Change your avatar</p>
+                      <input type="file"  (change)="onFileChange($event)" #content id="content" class="fadeIn second" name="content" placeholder="content">
+                    </form>
+                    <br>
+                    <button type="submit" class="btn btn-info" (click)="updateProfil(this.oldPassword.value, this.newPassword.value, this.newPasswordBis.value)" > Valider </button>       
+                    <p class="error-txt"> {{errorMsg}} </p>
+              </div>
+            </div>
+        </div>
+        <div class="card-footer bg-dark text-white row">
+            <div class="col-md-4"><a [className]="tabSelected === 1 ? 'active' : ''" (click)="selectTab(1)" >Posts</a></div>
+            <div class="col-md-4"><a [className]="tabSelected === 2 ? 'active' : ''" (click)="selectTab(2)" >Memes</a></div>
+            <div class="col-md-4"><a [className]="tabSelected === 3 ? 'active' : ''"(click)="selectTab(3)" >Likes</a></div>
+        </div>
+        <div class="card-footer bg-dark text-white row">
+            <div *ngIf="tabSelected === 1"> 
+              <div *ngFor="let item of posts">
+                <div class="col-md-6 card text-center bg-dark">
+                        <div class="card-header bg-dark text-white">
+                                <a class="title" routerLink="/post/{{item._id}}"><p>{{item.title}} </p></a>
+                        </div>
+                        <div class="card-body v">
+                                <a class="title" routerLink="/post/{{item._id}}">
+                                <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+                                </a>
+                        </div>
+                        <div class="card-footer bg-dark text-muted text-white">
+                                {{item.memesRelated}} Memes
+                        </div>
+                </div>
+                <hr/>
+            </div>
+          </div>
+            <div *ngIf="tabSelected === 2"> Tab 2</div>
+            <div *ngIf="tabSelected === 3"> Tab 3</div>
+        </div>
+    <hr/>
+</div>

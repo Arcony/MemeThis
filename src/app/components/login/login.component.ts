@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   createForm: FormGroup;
   user : User;
+  error:String;
   
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { 
     this.createForm = this.fb.group({
@@ -46,9 +47,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['login']);
       localStorage.setItem('token',this.user.token);
       localStorage.setItem('username',this.user.username);
+      localStorage.setItem('userId',this.user.userId);
+
       if(this.user.token != null)
         this.router.navigate(['browser']);
-    });
+    },(err) => {this.error = err.error.error; console.log(this.error)});
     
   }
 

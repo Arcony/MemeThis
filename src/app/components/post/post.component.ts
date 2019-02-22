@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { MemeService } from 'src/app/services/meme.service';
+import { LikeService } from 'src/app/services/like.service';
 
 
 import { User } from '../../models/user.model';
@@ -27,14 +28,15 @@ export class PostComponent implements OnInit {
   postContent : string;
   message:string;
   that = this;
+  meme : Meme;
 
-  constructor(private router: Router, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.fetchPost(id);
     this.postId = id;
-    this.fetchMemes(this.postId);
+    this.fetchMemesLikesAndComments(this.postId);
   }
 
   fetchPost(id) {
@@ -43,7 +45,6 @@ export class PostComponent implements OnInit {
     .subscribe((data: Post ) => {
         this.post = data; 
         this.postContent = data.content;     
-        
     }); 
   }
 
@@ -55,8 +56,40 @@ export class PostComponent implements OnInit {
     });
   }
 
+
+  fetchMemesLikesAndComments(id) {
+    console.log("Begin FETCH");
+    this.memeService
+    .getMemesLikesAndComments(id)
+    .subscribe((data: Meme[] ) => {
+        console.log("DATA BEFORE FETCH" ,this.memes)
+        this.memes = data;
+        console.log("DATA AFTER FETCH" ,this.memes)
+    });
+  }
+
   receiveMessage($event) {
-    this.fetchMemes($event);
+    this.fetchMemesLikesAndComments($event);
+  }
+
+  newLikeMeme(memeId,postId,commentId) {
+    console.log("like call");
+    this.likeService
+    .newLike(memeId,postId,commentId)
+    .subscribe((data: Meme ) => {
+        this.meme = data;
+        this.that.fetchMemesLikesAndComments(postId);
+    });
+  }
+
+  dislikeMeme(memeId,postId,commentId) {
+    console.log("dislike call");
+    this.likeService
+    .dislike(memeId,postId,commentId)
+    .subscribe((data: Meme ) => {
+        this.meme = data;
+        this.fetchMemesLikesAndComments(postId);
+    });
   }
   
 }

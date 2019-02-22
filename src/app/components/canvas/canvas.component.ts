@@ -17,7 +17,7 @@ import { Post } from '../../models/post.model'
 @Component({
   selector: 'app-canvas',
   templateUrl: './canvas.component.html',
-  styles: ['canvas { border: 1px solid #000; }']
+  styleUrls: ['./canvas.component.scss']
 })
 export class CanvasComponent implements AfterViewInit {
 
@@ -25,10 +25,11 @@ export class CanvasComponent implements AfterViewInit {
   }
 
   meme : Meme;
+  errorMsg: String;
   @ViewChild('canvas') public canvas: ElementRef;
 
-  @Input() public width = 400;
-  @Input() public height = 400;
+  @Input() public width = 360;
+  @Input() public height = 360;
   @Input() postId: string;
   @Input() postContent: string;
   @Output() messageEvent = new EventEmitter<string>();
@@ -50,8 +51,8 @@ export class CanvasComponent implements AfterViewInit {
     kitten.onload = () => {
       const iw = kitten.width;
       const ih = kitten.height;
-      const maxW = 400;
-      const maxH = 400;
+      const maxW = 360;
+      const maxH = 360;
       const scale = Math.min((maxW / iw), (maxH / ih));
       const iwScaled = iw * scale;
       const ihScaled = ih * scale;
@@ -68,7 +69,7 @@ export class CanvasComponent implements AfterViewInit {
       var topWidth = this.cx.measureText(top).width;
       var botWidth = this.cx.measureText(bot).width;
       this.cx.fillText(top, (canvasEl.width/2) - (topWidth /2), 50);
-      this.cx.fillText(bot, (canvasEl.width/2) - (botWidth /2), 200);
+      this.cx.fillText(bot, (canvasEl.width/2) - (botWidth /2), canvasEl.height - 20);
     };
   }
 
@@ -92,8 +93,8 @@ export class CanvasComponent implements AfterViewInit {
     kitten.onload = () => {
       const iw = kitten.width;
       const ih = kitten.height;
-      const maxW = 400;
-      const maxH = 400;
+      const maxW = 360;
+      const maxH = 360;
       const scale = Math.min((maxW / iw), (maxH / ih));
       const iwScaled = iw * scale;
       const ihScaled = ih * scale;
@@ -105,8 +106,18 @@ export class CanvasComponent implements AfterViewInit {
 }
 
 
-postCanvas(title,tag) {
-  
+postCanvas(title,tag, topText, botText) {
+  var date = new Date;
+  console.log( Date.parse(date.toString()) < Date.parse(localStorage.getItem('lastUpdate')) + 60000 );
+
+  if( Date.parse(date.toString()) < Date.parse(localStorage.getItem('lastUpdate')) + 60000 ) {
+    this.errorMsg = "Please wait a minute to post again."
+  }
+  else if( !title || (!botText && !topText))
+  {
+    this.errorMsg = "Missing field."
+  }
+  else {
   var newImg = document.createElement('img');
   newImg.crossOrigin = "anonymous";
   const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
@@ -120,8 +131,11 @@ postCanvas(title,tag) {
       .subscribe((data: Meme) =>{
         that.meme = data;
         that.messageEvent.emit(that.postId);
+        var date = new Date;
+        localStorage.setItem("lastUpdate", date.toString());
       });
     }, 'image/jpeg', 0.95); 
   }
+}
 
 }

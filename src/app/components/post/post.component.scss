@@ -1,0 +1,29 @@
+ 
+  body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    background-color: grey;
+  }
+
+.img-responsive {
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+
+a {
+    color: white;
+    font-size: 20px;
+}
+
+a:hover{
+    color: grey;
+    text-decoration: none;
+}

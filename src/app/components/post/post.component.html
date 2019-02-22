@@ -1,12 +1,31 @@
-<div>
-  <p> {{post?.title}} </p>
-  <img [src] = "'http://127.0.0.1:8887' + post?.content">
-</div>
 
-
+<div class="col-md-6 card text-center bg-dark">
+    <div class="card-header bg-dark text-white">
+        <p>{{post?.title}} </p>
+    </div>
+    <div class="card-body">
 <app-canvas *ngIf="postContent" (messageEvent)="receiveMessage($event)" [postContent]="postContent" [postId]="postId"></app-canvas>
-
-<div  *ngFor="let item of memes" >
-  <p> {{item.title}} </p>
-  <img [src] = "'http://127.0.0.1:8887' + item.content">
 </div>
+</div>
+
+<hr />
+<div  *ngFor="let item of memes" >
+    <div class="col-md-6 card text-center bg-dark">
+        <div class="card-header bg-dark text-white">
+          <a>{{item.title}} </a>
+        </div>
+        <div class="card-body">
+          <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+        </div>
+        <div class="card-footer bg-dark text-muted text-white">
+           <button *ngIf="!item.isLiked" class="btn btn-info pull-left" (click)="newLikeMeme(item._id ,item.postId)" > <i class="fa fa-arrow-up"></i>  Like</button>
+           <button *ngIf="item.isLiked" class="btn btn-info" (click)="dislikeMeme(item._id, item.postId)" > <i class="fa fa-arrow-down"></i>  Dislike</button>
+
+           <a> {{item.likes}} Likes |  {{item.comments}} Comments </a>
+        </div>
+        <div class="card-footer bg-dark text-muted text-white">
+            Comments 
+         </div>
+      </div>
+      <hr/>
+     </div>

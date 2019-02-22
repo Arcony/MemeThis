@@ -1,1 +1,41 @@
-<mat-toolbar> <a routerLink="browser"> MemeThis </a> </mat-toolbar>
+<nav class="navbar navbar-dark bg-dark mb-5">
+        <a class="navbar-brand" href="/browser"> MemeThis 4ME</a>
+        <div class="navbar-expand mr-auto">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" [routerLink]="'/user/' + userId" >{{username}}</a>
+            <a class="nav-item nav-link" href="#">Logout</a>
+            
+          </div>
+        </div>
+        <div class="nav navbar-right">
+            <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="this.formModal.show();" mdbWavesEffect>Upload</button>       
+        </div>
+      </nav>
+
+      <div mdbModal #form="mdb-modal" class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+              <!--Content-->
+              <div class="modal-content">
+      
+                  <!--Header-->
+                  <div class="modal-header">
+                      Describe your Post
+                  </div>
+                  <!--Body-->
+                  <div class="modal-body text-center mb-1">
+                      <div class="md-form ml-0 mr-0">
+                          <form class="form-group" >
+                              <input type="text" #title id="title" class="fadeIn second" name="title" placeholder="Write a title">
+                              <input type="text" #tag id="tag"  class="fadeIn second" name="tag" placeholder="Choose One Tag"  oninput="this.value = this.value.toLowerCase()">
+                              <input type="file"  (change)="onFileChange($event)" #content id="content" class="fadeIn second" name="content" placeholder="content">
+                            </form>
+                            <br>
+                            <button type="submit" class="btn btn-info" (click)="uploadPost(this.title.value , this.tag.value)" > Valider </button>       
+                            <p class="error-txt"> {{errorMsg}} </p>
+                      </div>
+                  </div>
+      
+              </div>
+              <!--/.Content-->
+          </div>
+      </div>

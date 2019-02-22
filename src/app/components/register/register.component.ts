@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
 createForm: FormGroup;
 user: User;
+errorMsg: String;
   
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { 
     this.createForm = this.fb.group({
@@ -43,15 +44,19 @@ user: User;
     //{
     if( !email || !password || !username)
     {
-      return false;
+      this.errorMsg = "Missing field"
     }
     this.authService
     .register(email,password,username)
     .subscribe((data: User) => {
       this.user = data;
       this.router.navigate(['login']);
-    });
+    },(err) => {this.errorMsg = err.error.error; console.log(this.errorMsg)});
    // }
   };
+
+  toLoginPage() {
+    this.router.navigate(['login']);
+  }
 
 }

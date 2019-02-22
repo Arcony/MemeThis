@@ -3,6 +3,6 @@ export interface Post {
     title: string;
     content: string;
     tag: string;
-    userId: number;
+    userId: string;
   }
   

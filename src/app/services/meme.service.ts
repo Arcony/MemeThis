@@ -19,7 +19,6 @@ export class MemeService {
     var headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
 
-    console.log("Content",content);
     let testData: FormData = new FormData();
     testData.append('content', content );
     testData.append('postId', postId );
@@ -32,5 +31,13 @@ export class MemeService {
 
   getMemes (id) {
     return this.http.get('http://localhost:8080/allPostMemes/'+ id);
+  }
+
+  getMemesLikesAndComments (id) {
+
+    var headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
+    console.log("request is going")
+    return this.http.get('http://localhost:8080/allMemesLikesComments/'+ id,  {headers});
   }
 }
