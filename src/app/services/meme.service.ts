@@ -33,11 +33,27 @@ export class MemeService {
     return this.http.get('http://localhost:8080/allPostMemes/'+ id);
   }
 
-  getMemesLikesAndComments (id) {
+  getMemesLikesAndComments (postId) {
 
     var headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-    console.log("request is going")
-    return this.http.get('http://localhost:8080/allMemesLikesComments/'+ id,  {headers});
+
+    return this.http.get('http://localhost:8080/allMemesLikesComments/'+ postId,  {headers});
+  }
+
+  getMemesLikesAndCommentsForProfil (userId) {
+
+    var headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
+
+    return this.http.get('http://localhost:8080/allMemesLikesCommentsForProfil/'+ userId,  {headers});
+  }
+
+  getMemesLikedForProfil (userId) {
+
+    var headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
+
+    return this.http.get('http://localhost:8080/allMemesLikedForProfil/'+ userId,  {headers});
   }
 }

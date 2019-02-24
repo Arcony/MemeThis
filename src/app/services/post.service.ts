@@ -19,7 +19,7 @@ export class PostService {
   }
 
   getPostsAndMemesForProfil (id) {
-    return this.http.get('http://localhost:8080/allPostMemesForProfil'+id);
+    return this.http.get('http://localhost:8080/allPostMemesForProfil/'+id);
   }
 
   getPost (id) {

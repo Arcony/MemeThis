@@ -32,7 +32,7 @@
                         <div class="card-header bg-dark text-white">
                                 <a class="title" routerLink="/post/{{item._id}}"><p>{{item.title}} </p></a>
                         </div>
-                        <div class="card-body v">
+                        <div class="card-body">
                                 <a class="title" routerLink="/post/{{item._id}}">
                                 <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
                                 </a>
@@ -44,8 +44,50 @@
                 <hr/>
             </div>
           </div>
-            <div *ngIf="tabSelected === 2"> Tab 2</div>
-            <div *ngIf="tabSelected === 3"> Tab 3</div>
+            <div *ngIf="tabSelected === 2"> 
+                
+                <div  *ngFor="let item of memes" >
+                    <div class="col-md-6 card text-center bg-dark">
+                        <div class="card-header bg-dark text-white">
+                          <a>{{item.title}} </a>
+                        </div>
+                        <div class="card-body">
+                          <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+                        </div>
+                        <div class="card-footer bg-dark text-muted text-white">
+                           <button *ngIf="!item.isLiked" class="btn btn-info pull-left" (click)="newLikeMeme(item._id ,item.postId)" > <i class="fa fa-arrow-up"></i>  Like</button>
+                           <button *ngIf="item.isLiked" class="btn btn-info" (click)="dislikeMeme(item._id, item.postId)" > <i class="fa fa-arrow-down"></i>  Dislike</button>
+                
+                           <a> {{item.likes}} Likes |  {{item.comments}} Comments </a>
+                        </div>
+                      </div>
+                      <hr/>
+                    
+                </div>
+            </div>
+            <div *ngIf="tabSelected === 3"> 
+
+                <div  *ngFor="let item of memesLiked" >
+                    <div class="col-md-6 card text-center bg-dark">
+                        <div class="card-header bg-dark text-white">
+                          <a>{{item.title}} </a>
+                        </div>
+                        <div class="card-body">
+                          <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+                        </div>
+                        <div class="card-footer bg-dark text-muted text-white">
+                           <button *ngIf="!item.isLiked" class="btn btn-info pull-left" (click)="newLikeMemeLiked(item._id ,item.postId)" > <i class="fa fa-arrow-up"></i>  Like</button>
+                           <button *ngIf="item.isLiked" class="btn btn-info" (click)="dislikeMemeLiked(item._id, item.postId)" > <i class="fa fa-arrow-down"></i>  Dislike</button>
+                
+                           <a> {{item.likes}} Likes |  {{item.comments}} Comments </a>
+                        </div>
+                      </div>
+                      <hr/>
+                    
+                </div>
+                
+
+            </div>
         </div>
     <hr/>
 </div>

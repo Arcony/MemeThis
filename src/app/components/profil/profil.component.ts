@@ -33,6 +33,9 @@ export class ProfilComponent implements OnInit {
   posts: Post[];
   formData:FormData = new FormData();
   tabSelected: number;
+  memes: Meme[];
+  meme: Meme;
+  memesLiked: Meme[];
   @ViewChild ('form') public formModal: any;
   @ViewChild('fileInput') fileInput: ElementRef;
 
@@ -51,7 +54,6 @@ export class ProfilComponent implements OnInit {
       console.log(data);
       this.userConnected = data;
     });
-    this.selectTab(1);
   }
 
   createForm() {
@@ -107,11 +109,84 @@ export class ProfilComponent implements OnInit {
     this.tabSelected = value;
     if(value === 1) {
         this.postService
-        .getPostsAndMemesForProfil(this.userFetch.userId)
+        .getPostsAndMemesForProfil(this.userFetch.id)
         .subscribe((data: Post[] ) =>{
             this.posts = data;
         });
     }
+    if(value === 2) {
+      this.memeService
+      .getMemesLikesAndCommentsForProfil(this.userFetch.id)
+      .subscribe((data: Meme[] ) =>{
+          this.memes = data;
+      });
+    }
+    if(value === 3) {
+      this.memeService
+      .getMemesLikedForProfil(this.userFetch.id)
+      .subscribe((data: Meme[] ) =>{
+        console.log(data);
+          this.memesLiked = data;
+          
+      });
+    }
   }
 
+  newLikeMeme(memeId,postId,commentId) {
+    this.likeService
+    .newLike(memeId,postId,commentId)
+    .subscribe((data: Meme ) => {
+        this.meme = data;
+        this.fetchMemesLikesAndComments(this.userConnected.id);
+    });
+  }
+
+  dislikeMeme(memeId,postId,commentId) {
+    this.likeService
+    .dislike(memeId,postId,commentId)
+    .subscribe((data: Meme ) => {
+        this.meme = data;
+        this.fetchMemesLikesAndComments(this.userConnected.id);
+    });
+  }
+
+  newLikeMemeLiked(memeId,postId,commentId) {
+    this.likeService
+    .newLike(memeId,postId,commentId)
+    .subscribe((data: Meme ) => {
+        this.meme = data;
+        this.fetchLikedMemes();
+    });
+  }
+
+  dislikeMemeLiked(memeId,postId,commentId) {
+    this.likeService
+    .dislike(memeId,postId,commentId)
+    .subscribe((data: Meme ) => {
+        this.meme = data;
+        this.fetchLikedMemes();
+    });
+ 
+  }
+
+  fetchMemesLikesAndComments(userId) {
+    this.memeService
+    .getMemesLikesAndCommentsForProfil(userId)
+    .subscribe((data: Meme[] ) => {
+        this.memes = data;
+
+    });
+  }
+
+  fetchLikedMemes() {
+    console.log("fetch now all liked meme")
+    this.memeService
+    .getMemesLikedForProfil(this.userFetch.id)
+    .subscribe((data: Meme[] ) =>{
+      console.log("then");
+      console.log(this.memesLiked)
+        this.memesLiked = data;
+      console.log(this.memesLiked)
+    });
+  }
 }
