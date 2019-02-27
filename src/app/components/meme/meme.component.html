@@ -1,0 +1,61 @@
+<div class="col-md-6 card text-center bg-dark">
+  <div class="card-header bg-dark text-white">
+    <p class="title">{{meme?.title}} </p>
+  </div>
+  <div class="card-body v">
+    <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + meme?.content">
+  </div>
+  <div class="card-footer bg-dark text-muted text-white">
+    <div class="media">
+      <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + userConnected?.picture"/>
+      <div class="media-body">
+        <div class="form-group basic-textarea rounded-corners">
+          <textarea name="message"   [(ngModel)]="message" (ngModelChange)="message = $event" class="form-control z-depth-1" id="commentaire" rows="3" placeholder="Write your comment..."></textarea>
+          <button class="btn btn-info float-right margin-top-10" (click)="newCommentMeme(this.message)">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr />
+
+
+
+<div class="col-md-6 card text-center bg-dark">
+    <div *ngFor="let item of comments, let i = index">
+            <div class="card-header bg-dark text-white">
+                <div class="media">
+                    <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + item?.userAvatar"/>
+                    <div class="media-body">
+                        <h6 class="text-left pull-left">{{item.username}}</h6>
+                        <p class="text-left"> {{item.text}}</p>
+                        <p class="text-left little-btn" >
+                        <a *ngIf="item.subCommentNb"  (click)="activeResponse(i)" class="text-left little-btn"> See answers ({{item.subCommentNb}}) |</a>
+                        <a class="pull-left little-btn" (click)="activeReply(i,item.username)"> Reply </a></p>
+                    </div>
+                </div>
+                <div *ngIf="seeResponse == i">
+                <div *ngFor="let response of item.subComments" class="media media-response shadow-textarea margin-left response">
+                      
+                  <img class="d-flex rounded-circle avatar-response z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + response?.userAvatar">
+                      <div class="media-body">
+                        <h6 class="text-left pull-left">{{response.username}}</h6>
+                        <p class="text-left"> {{response.text}}</p>
+                        <p class="text-left little-btn" >
+                        <a class="pull-left little-btn" (click)="activeReply(i,item.username)"> Reply </a></p>
+                      </div>
+                </div>
+              </div>
+                <div *ngIf="replyActivate == i" class="media  media-response response">
+                    <img class="d-flex rounded-circle avatar-response z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + userConnected?.picture"/>
+                    <div class="media-body">
+                      <div class="form-group basic-textarea rounded-corners">
+                        <textarea name="reply"   [(ngModel)]="reply" (ngModelChange)="reply = $event" class="form-control z-depth-1" id="commentaire" rows="3" placeholder="Write your comment..."></textarea>
+                        <button class="btn btn-info float-right margin-top-10" (click)="newCommentComment(this.reply,item._id)">Send</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <hr/>
+</div>

@@ -1,0 +1,83 @@
+
+  body {
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    background-color: grey;
+  }
+
+.img-responsive {
+    max-width: 400px;
+    max-height: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+
+
+a {
+    color: white;
+    font-size: 20px;
+}
+
+a:hover{
+    color: grey;
+    text-decoration: none;
+}
+
+.media .avatar {
+    width: 64px;
+    height: 64px;
+
+    
+}
+
+.media-response {
+    margin-top: 10px;
+}
+.avatar-response {
+    width: 46px;
+    height: 46px;    
+}
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
+
+textarea{
+    resize: none;
+}
+
+.margin-top-10{
+    margin-top:10px;
+}
+
+.little-btn {
+    font-size: 12px;
+    line-height: 0px;
+    cursor: pointer;
+}
+
+.response{
+    padding-left: 5em;
+}
+
+
+.title {
+    font-size: 20px;
+    cursor : pointer;
+  }
+  
+  .title:hover {
+    color: #0099ff
+  }
+
+  .card-header {
+    padding-bottom: 0px;
+}

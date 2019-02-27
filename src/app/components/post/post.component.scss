@@ -1,9 +1,4 @@
- 
-  body {
-    font-family: "Poppins", sans-serif;
-    height: 100vh;
-    background-color: grey;
-  }
+
 
 .img-responsive {
     max-width: 500px;
@@ -24,6 +19,33 @@ a {
 }
 
 a:hover{
-    color: grey;
+    color: #0099ff !important;
     text-decoration: none;
+    cursor : pointer;
+}
+
+
+.title {
+  font-size: 20px;
+  cursor : pointer;
+}
+
+.title:hover {
+  color: #0099ff;
+}
+
+.card-nobot {
+  padding-bottom: 0;
+}
+
+.card-footer{
+  border-top: none;
+}
+
+.liked{
+  color: #0099ff !important;
+}
+
+.double-btn-footer {
+  line-height: 3em;
 }

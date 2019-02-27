@@ -1,7 +1,7 @@
 
 <div class="col-md-6 card text-center bg-dark">
-    <div class="card-header bg-dark text-white">
-        <p>{{post?.title}} </p>
+    <div class="card-header card-nobot bg-dark text-white">
+        <p class="title">{{post?.title}} </p>
     </div>
     <div class="card-body">
 <app-canvas *ngIf="postContent" (messageEvent)="receiveMessage($event)" [postContent]="postContent" [postId]="postId"></app-canvas>
@@ -17,15 +17,15 @@
         <div class="card-body">
           <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
         </div>
-        <div class="card-footer bg-dark text-muted text-white">
-           <button *ngIf="!item.isLiked" class="btn btn-info pull-left" (click)="newLikeMeme(item._id ,item.postId)" > <i class="fa fa-arrow-up"></i>  Like</button>
-           <button *ngIf="item.isLiked" class="btn btn-info" (click)="dislikeMeme(item._id, item.postId)" > <i class="fa fa-arrow-down"></i>  Dislike</button>
-
-           <a> {{item.likes}} Likes |  {{item.comments}} Comments </a>
+        <div class="card-footer bg-dark text-white row">
+          <div class="col-md-6 card double-btn-footer text-center bg-dark">
+            <a class="double-btn-footer" *ngIf="item.isLiked" (click)="dislikeMeme(item._id, item.postId)"> {{item.likes}}  <i class="far liked fa-arrow-alt-circle-up"></i>     </a>
+            <a class="double-btn-footer" *ngIf="!item.isLiked" (click)="newLikeMeme(item._id, item.postId)"> {{item.likes}}  <i class="far fa-arrow-alt-circle-up"></i>     </a>
+          </div>
+          <div class="col-md-6 card  text-center bg-dark">
+            <a class="double-btn-footer" routerLink="/meme/{{item._id}}" >  {{item.comments}}  <i class="fas fa-comment"></i> </a>
+          </div>
         </div>
-        <div class="card-footer bg-dark text-muted text-white">
-            Comments 
-         </div>
       </div>
       <hr/>
      </div>

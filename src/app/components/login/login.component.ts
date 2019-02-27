@@ -44,10 +44,14 @@ export class LoginComponent implements OnInit {
     .login(email,password)
     .subscribe((data: User) =>{
       this.user = data;
-      this.router.navigate(['login']);
+      
+      console.log(this.user);
       localStorage.setItem('token',this.user.token);
       localStorage.setItem('username',this.user.username);
-      localStorage.setItem('userId',this.user.id);
+      localStorage.setItem('userId',this.user.userId);
+      console.log(localStorage.getItem('userId'));
+      console.log(localStorage.getItem('token'));
+      this.router.navigate(['login']);
 
       if(this.user.token != null)
         this.router.navigate(['browser']);

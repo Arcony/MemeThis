@@ -16,6 +16,7 @@ import { CanvasComponent } from './components/canvas/canvas.component';
 import { ModalModule, WavesModule, InputsModule, MDBBootstrapModule } from 'angular-bootstrap-md'
 import {  ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
+import { MemeComponent } from './components/meme/meme.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'browser', component: BrowserComponent, canActivate: [AuthGuard]},
   { path: 'post/:id', component: PostComponent, canActivate: [AuthGuard]},
   { path: 'user/:id', component: ProfilComponent, canActivate: [AuthGuard]},
+  { path: 'meme/:memeId', component: MemeComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: 'login', pathMatch: 'full'}
 
 ];
@@ -37,7 +39,8 @@ const routes: Routes = [
     BrowserComponent,
     PostComponent,
     CanvasComponent,
-    ProfilComponent
+    ProfilComponent,
+    MemeComponent
   ],
   imports: [
     BrowserModule,

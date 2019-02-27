@@ -67,6 +67,7 @@ export class NavComponent implements OnInit {
     }
    
       onFileChange(event) {
+        console.log(this.userId);
         let fileList: FileList = event.target.files;
         let file: File = fileList[0]; 
         
@@ -80,6 +81,11 @@ export class NavComponent implements OnInit {
           this.errorMsg=""
           this.formData.append('content', file, file.name);
         }       
+      }
+
+      logOut() {
+        localStorage.clear();
+        this.router.navigate(['login']);
       }
 
 }

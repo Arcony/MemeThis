@@ -109,21 +109,21 @@ export class ProfilComponent implements OnInit {
     this.tabSelected = value;
     if(value === 1) {
         this.postService
-        .getPostsAndMemesForProfil(this.userFetch.id)
+        .getPostsAndMemesForProfil(this.userFetch.userId)
         .subscribe((data: Post[] ) =>{
             this.posts = data;
         });
     }
     if(value === 2) {
       this.memeService
-      .getMemesLikesAndCommentsForProfil(this.userFetch.id)
+      .getMemesLikesAndCommentsForProfil(this.userFetch.userId)
       .subscribe((data: Meme[] ) =>{
           this.memes = data;
       });
     }
     if(value === 3) {
       this.memeService
-      .getMemesLikedForProfil(this.userFetch.id)
+      .getMemesLikedForProfil(this.userFetch.userId)
       .subscribe((data: Meme[] ) =>{
         console.log(data);
           this.memesLiked = data;
@@ -137,7 +137,7 @@ export class ProfilComponent implements OnInit {
     .newLike(memeId,postId,commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
-        this.fetchMemesLikesAndComments(this.userConnected.id);
+        this.fetchMemesLikesAndComments(this.userConnected.userId);
     });
   }
 
@@ -146,7 +146,7 @@ export class ProfilComponent implements OnInit {
     .dislike(memeId,postId,commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
-        this.fetchMemesLikesAndComments(this.userConnected.id);
+        this.fetchMemesLikesAndComments(this.userConnected.userId);
     });
   }
 
@@ -181,7 +181,7 @@ export class ProfilComponent implements OnInit {
   fetchLikedMemes() {
     console.log("fetch now all liked meme")
     this.memeService
-    .getMemesLikedForProfil(this.userFetch.id)
+    .getMemesLikedForProfil(this.userFetch.userId)
     .subscribe((data: Meme[] ) =>{
       console.log("then");
       console.log(this.memesLiked)

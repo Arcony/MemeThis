@@ -1,9 +1,9 @@
 <nav class="navbar navbar-dark bg-dark mb-5">
-        <a class="navbar-brand" href="/browser"> MemeThis 4ME</a>
+        <a class="navbar-brand" href="/browser"> MemeThis 4 ME</a>
         <div class="navbar-expand mr-auto">
           <div class="navbar-nav">
             <a class="nav-item nav-link" [routerLink]="'/user/' + userId" >{{username}}</a>
-            <a class="nav-item nav-link" href="#">Logout</a>
+            <button class="btn btn-danger nav-item nav-link text-white" (click)="this.logOut()">Logout</button>
             
           </div>
         </div>
@@ -28,7 +28,7 @@
                               <input type="text" #title id="title" class="fadeIn second" name="title" placeholder="Write a title">
                               <input type="text" #tag id="tag"  class="fadeIn second" name="tag" placeholder="Choose One Tag"  oninput="this.value = this.value.toLowerCase()">
                               <input type="file"  (change)="onFileChange($event)" #content id="content" class="fadeIn second" name="content" placeholder="content">
-                            </form>
+                          </form>
                             <br>
                             <button type="submit" class="btn btn-info" (click)="uploadPost(this.title.value , this.tag.value)" > Valider </button>       
                             <p class="error-txt"> {{errorMsg}} </p>

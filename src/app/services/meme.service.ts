@@ -33,6 +33,10 @@ export class MemeService {
     return this.http.get('http://localhost:8080/allPostMemes/'+ id);
   }
 
+  getMeme (memeId) {
+    return this.http.get('http://localhost:8080/meme/'+ memeId);
+  }
+
   getMemesLikesAndComments (postId) {
 
     var headers: HttpHeaders = new HttpHeaders();
