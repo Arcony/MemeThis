@@ -1,15 +1,17 @@
 <div class="row">
-<div class="col-md-7">
+<div class="col-md-8 mx-auto text-center">
 <canvas #canvas ></canvas>
 </div>
-<div class="col-md-5">
-<input  class="form-control space-top" type="text" placeholder="Top Text" name="top" #top  size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
-<input class="form-control space-top" type="text" placeholder="Bottom Text" name="bot" #bot    size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
-<input class="form-control space-top"type="text" placeholder="Title of your meme" name="title" #title    size="55" maxlength="55"/>
-<input class="form-control space-top" type="text" placeholder="Tag" name="tag" #tag    size="5" maxlength="5" oninput="this.value = this.value.toUpperCase()" />
+<div class="col-md-8 mx-auto content-center">
+<input autocomplete="off"class="form-control space-top" type="text" placeholder="Top Text" name="top" #top oninput="this.value = this.value.toUpperCase()" />
+<input autocomplete="off" class="form-control space-top" type="text" placeholder="Bottom Text" name="bot" #bot    size="26" maxlength="26" oninput="this.value = this.value.toUpperCase()" />
+<input autocomplete="off" class="form-control space-top"type="text" placeholder="Title of your meme" name="title" #title    size="55" maxlength="55"/>
+<input autocomplete="off" class="form-control space-top" type="text" placeholder="Tag" name="tag" #tag    size="5" maxlength="5" oninput="this.value = this.value.toUpperCase()" />
+<label class=" space-top float-left text-white">Font Size : </label>
+<input (change)="updateFontSize($event)" class="form-control" type="number" value="36" id="fontSize" name="fontSize" #fontSize/>
 <br>
 <button class="btn btn-info" type="submit" (click)="drawOnCanvas(this.top.value ,this.bot.value )" > Generate </button>
-<button  class="btn btn-info margin-left" type="submit" (click)="postCanvas(this.title.value,this.tag.value, this.top.value ,this.bot.value)" > Post this Meme </button>
+<button  class="btn btn-info margin-left" type="submit" (click)="postCanvas(this.title.value,this.tag.value, this.top.value ,this.bot.value)" > Post </button>
 <p class="error-txt" *ngIf="errorMsg"> {{errorMsg}}</p>
 </div>
 </div>

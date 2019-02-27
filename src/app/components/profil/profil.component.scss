@@ -6,8 +6,8 @@
   }
 
 .img-responsive {
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 400px;
+    max-height: 600px;
     width: 100%;
     margin: 0 auto;
 }
@@ -203,7 +203,6 @@ input[type=button], input[type=submit], input[type=reset]  {
   
   .label-file {
     cursor: pointer;
-    color: #00b1ca;
     font-weight: bold;
 }
 .label-file:hover {
@@ -221,8 +220,19 @@ input[type=button], input[type=submit], input[type=reset]  {
 
 a {
     cursor : pointer; 
+    color: white;
+    text-decoration: none;
 }
 
 .active {
     background: grey;
 }
+
+.title {
+    font-size: 20px;
+    cursor : pointer;
+  }
+  
+  .title:hover {
+    color: #0099ff;
+  }

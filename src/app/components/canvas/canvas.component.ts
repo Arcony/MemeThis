@@ -23,13 +23,13 @@ export class CanvasComponent implements AfterViewInit {
 
   constructor(private activatedRoute: ActivatedRoute, private fb: FormBuilder, private router: Router, private authService: AuthService, private memeService: MemeService) { 
   }
-
+  fontSize: number;
   meme : Meme;
   errorMsg: String;
   @ViewChild('canvas') public canvas: ElementRef;
 
-  @Input() public width = 360;
-  @Input() public height = 360;
+  @Input() public width = 1200;
+  @Input() public height = 600;
   @Input() postId: string;
   @Input() postContent: string;
   @Output() messageEvent = new EventEmitter<string>();
@@ -39,6 +39,11 @@ export class CanvasComponent implements AfterViewInit {
 
   public ngAfterViewInit() {
    this.drawCanvas();
+   this.fontSize=36;
+  }
+
+  updateFontSize(event) {
+    this.fontSize = event.target.value;
   }
 
   drawOnCanvas(top,bot){
@@ -51,8 +56,8 @@ export class CanvasComponent implements AfterViewInit {
     kitten.onload = () => {
       const iw = kitten.width;
       const ih = kitten.height;
-      const maxW = 360;
-      const maxH = 360;
+      const maxW = canvasEl.width;
+      const maxH = canvasEl.height;
       const scale = Math.min((maxW / iw), (maxH / ih));
       const iwScaled = iw * scale;
       const ihScaled = ih * scale;
@@ -60,7 +65,7 @@ export class CanvasComponent implements AfterViewInit {
       canvasEl.height = ihScaled;
       this.cx.drawImage(kitten, 0, 0, iwScaled, ihScaled);
       this.cx.fillStyle = '#ffffff'; 
-      this.cx.font = "30px Impact";
+      this.cx.font = this.fontSize+"px Impact";
       this.cx.shadowBlur = 4;
       this.cx.shadowOffsetX = 3;
       this.cx.shadowOffsetY = 3;
@@ -68,8 +73,9 @@ export class CanvasComponent implements AfterViewInit {
       this.cx.lineWidth    = 5;
       var topWidth = this.cx.measureText(top).width;
       var botWidth = this.cx.measureText(bot).width;
-      this.cx.fillText(top, (canvasEl.width/2) - (topWidth /2), 50);
-      this.cx.fillText(bot, (canvasEl.width/2) - (botWidth /2), canvasEl.height - 20);
+      console.log(this.fontSize)
+      this.cx.fillText(top, (canvasEl.width/2) - (topWidth /2), this.fontSize  );
+      this.cx.fillText(bot, (canvasEl.width/2) - (botWidth /2),  canvasEl.height - this.fontSize/5 - 10);
     };
   }
 
@@ -93,8 +99,8 @@ export class CanvasComponent implements AfterViewInit {
     kitten.onload = () => {
       const iw = kitten.width;
       const ih = kitten.height;
-      const maxW = 360;
-      const maxH = 360;
+      const maxW = canvasEl.width;
+      const maxH = canvasEl.height;
       const scale = Math.min((maxW / iw), (maxH / ih));
       const iwScaled = iw * scale;
       const ihScaled = ih * scale;

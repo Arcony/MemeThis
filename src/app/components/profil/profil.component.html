@@ -25,10 +25,10 @@
             <div class="col-md-4"><a [className]="tabSelected === 2 ? 'active' : ''" (click)="selectTab(2)" >Memes</a></div>
             <div class="col-md-4"><a [className]="tabSelected === 3 ? 'active' : ''"(click)="selectTab(3)" >Likes</a></div>
         </div>
-        <div class="card-footer bg-dark text-white row">
+        <div class="card-footer bg-dark text-white">
             <div *ngIf="tabSelected === 1"> 
               <div *ngFor="let item of posts">
-                <div class="col-md-6 card text-center bg-dark">
+                <div class="col-md-12 card text-center bg-dark">
                         <div class="card-header bg-dark text-white">
                                 <a class="title" routerLink="/post/{{item._id}}"><p>{{item.title}} </p></a>
                         </div>
@@ -47,9 +47,9 @@
             <div *ngIf="tabSelected === 2"> 
                 
                 <div  *ngFor="let item of memes" >
-                    <div class="col-md-6 card text-center bg-dark">
+                    <div class="col-md-12 card text-center bg-dark">
                         <div class="card-header bg-dark text-white">
-                          <a>{{item.title}} </a>
+                          <a class="title" routerLink="/meme/{{item._id}}">{{item.title}} </a>
                         </div>
                         <div class="card-body">
                           <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
@@ -68,9 +68,9 @@
             <div *ngIf="tabSelected === 3"> 
 
                 <div  *ngFor="let item of memesLiked" >
-                    <div class="col-md-6 card text-center bg-dark">
+                    <div class="col-md-12 card text-center bg-dark">
                         <div class="card-header bg-dark text-white">
-                          <a>{{item.title}} </a>
+                          <a class="title" routerLink="/meme/{{item._id}}">{{item.title}} </a>
                         </div>
                         <div class="card-body">
                           <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">

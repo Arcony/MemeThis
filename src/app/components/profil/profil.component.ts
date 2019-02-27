@@ -49,6 +49,7 @@ export class ProfilComponent implements OnInit {
     this.userService.getUser(this.id)
     .subscribe((data : User) => {
       this.userFetch = data;
+      console.log(data);
     });
     this.userService.getMyself().subscribe((data : User) => {
       console.log(data);
@@ -108,6 +109,7 @@ export class ProfilComponent implements OnInit {
   selectTab(value) {
     this.tabSelected = value;
     if(value === 1) {
+      console.log(this.userFetch)
         this.postService
         .getPostsAndMemesForProfil(this.userFetch.userId)
         .subscribe((data: Post[] ) =>{

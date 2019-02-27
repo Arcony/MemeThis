@@ -11,9 +11,12 @@ form {
     margin-top: 1em;
   }
 
- canvas { border: 1px solid #000; }
+ canvas { border: 1px solid #000; width: 100%;}
 
  .error-txt {
     margin-top: 10px;
     color: red;
   }
+
+  .row-centered {text-align:center;}
+.col-centered { display:inline-block; float:none; margin-right:-4px;}
