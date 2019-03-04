@@ -23,16 +23,34 @@ export class BrowserComponent implements OnInit {
 
   posts : Post[];
   post : Post;
-
+  tabActivated : number;
   constructor(private router: Router, private postService: PostService,) { }
 
   ngOnInit() {
-    this.fetchPosts();
+    this.tabActivated = 1;
+    this.fetchPostsHot();
   }
 
   fetchPosts() {
     this.postService
     .getPostsAndMemes()
+    .subscribe((data: Post[] ) =>{
+        this.posts = data;
+    });
+  }
+
+
+  fetchPostsHot() {
+    this.postService
+    .getPostsAndMemesHot()
+    .subscribe((data: Post[] ) =>{
+        this.posts = data;
+    });
+  }
+
+  fetchPostsBest() {
+    this.postService
+    .getPostsAndMemesBest()
     .subscribe((data: Post[] ) =>{
         this.posts = data;
     });
@@ -44,6 +62,21 @@ export class BrowserComponent implements OnInit {
     .subscribe((data: string ) =>{
         return data;
     });
+  }
+
+
+  
+  selectTab(value) {
+    this.tabActivated = value;
+    if(value === 1) {
+      this.fetchPostsHot();
+    }
+    if(value === 2) {
+      this.fetchPosts();
+    }
+    if(value === 3) {
+     this.fetchPostsBest();
+    }
   }
 
 }

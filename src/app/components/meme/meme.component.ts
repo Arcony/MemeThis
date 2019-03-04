@@ -10,12 +10,14 @@ import { MemeService } from 'src/app/services/meme.service';
 import { LikeService } from 'src/app/services/like.service';
 import { CommentService } from 'src/app/services/comment.service';
 import { UserService } from 'src/app/services/user.service';
+import { NotificationService } from 'src/app/services/notification.service';
+
 
 import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
 import { Meme } from '../../models/meme.model';
 import { Comment } from '../../models/comment.model';
-
+import { Notification } from '../../models/notification.model';
 
 @Component({
   selector: 'app-meme',
@@ -31,7 +33,7 @@ export class MemeComponent implements OnInit {
   replyActivate: number;
   reply: string;
   seeResponse: number;
-  constructor(private router: Router, private userService: UserService, private commentService: CommentService, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private notificationService: NotificationService, private userService: UserService, private commentService: CommentService, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
   
   ngOnInit() {
     const memeId = this.route.snapshot.paramMap.get('memeId');
@@ -56,20 +58,22 @@ export class MemeComponent implements OnInit {
     this.commentService
     .getMemeComments(memeId)
     .subscribe((data: Comment[] ) => {
-
+      this.message = '';
       console.log(data);
         this.comments = data;
     });
   }
 
-  newCommentComment(text,commentId) {
+  newCommentComment(text,commentId,indexReplyBox) {
     console.log(text);
     const memeId = this.meme._id;
     const postId = this.meme.postId;
     this.commentService
     .newCommentComment(memeId,postId,text,commentId)
     .subscribe((data: Comment ) => {
+
        this.fetchMemeComments(memeId);
+       this.activeResponse(indexReplyBox);
     });
   }
   
@@ -80,8 +84,14 @@ export class MemeComponent implements OnInit {
     this.commentService
     .newComment(memeId,postId,text)
     .subscribe((data: Comment ) => {
+      console.log(data);
       this.fetchMemeComments(memeId);
-
+      this.notificationService
+      .createNotification( this.meme.userId , this.meme.postId, data._id)
+      .subscribe((data: Notification) => {
+        console.log(data);
+      })
+      console.log("notif");
     });
   }
 

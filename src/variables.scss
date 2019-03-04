@@ -1,0 +1,24 @@
+$textColor : #fff;
+$background : #121212;
+$highLight : #0099ff;
+$error : red;
+$black: black;
+$cardBackground : #252E38;
+$cardBackgroundHover : #252E38;
+$borderColor : #252E38;
+$btnColor : #56baed;
+$btnColorHover :  #39ace7; 
+$activeTab : #1a2125;
+$btnPower : #9B3133;
+$btnPowerHover : #C35659;
+.bg-dark {
+    background-color:#252E38 !important;
+}
+
+.btn {
+    background-color: #56baed;
+    border : #56baed;
+}
+.btn:hover {
+    background-color : #39ace7; 
+}

@@ -1,5 +1,5 @@
 <div class="col-md-6 card text-center bg-dark">
-    <div class="card-header bg-dark text-white">
+    <div class="card-header card-nobot  bg-dark text-white">
         <p>Profil de {{userFetch?.username}} </p>
     </div>
         <div class="card-body text-white">
@@ -20,15 +20,16 @@
               </div>
             </div>
         </div>
-        <div class="card-footer bg-dark text-white row">
-            <div class="col-md-4"><a [className]="tabSelected === 1 ? 'active' : ''" (click)="selectTab(1)" >Posts</a></div>
-            <div class="col-md-4"><a [className]="tabSelected === 2 ? 'active' : ''" (click)="selectTab(2)" >Memes</a></div>
-            <div class="col-md-4"><a [className]="tabSelected === 3 ? 'active' : ''"(click)="selectTab(3)" >Likes</a></div>
+        <div class="card-footer bg-dark row">
+            <div class="col-md-4 card double-btn-footer"><a class="double-btn-footer" [className]="tabSelected === 1 ? 'active' : ''" (click)="selectTab(1)" >Posts</a></div>
+            <div class="col-md-4 card double-btn-footer"><a class="double-btn-footer" [className]="tabSelected === 2 ? 'active' : ''" (click)="selectTab(2)" >Memes</a></div>
+            <div class="col-md-4 card double-btn-footer"><a class="double-btn-footer" [className]="tabSelected === 3 ? 'active' : ''"(click)="selectTab(3)" >Likes</a></div>
         </div>
-        <div class="card-footer bg-dark text-white">
+      </div>
             <div *ngIf="tabSelected === 1"> 
+                <br/>
               <div *ngFor="let item of posts">
-                <div class="col-md-12 card text-center bg-dark">
+                <div class="col-md-6 card text-center bg-dark">
                         <div class="card-header bg-dark text-white">
                                 <a class="title" routerLink="/post/{{item._id}}"><p>{{item.title}} </p></a>
                         </div>
@@ -41,53 +42,57 @@
                                 {{item.memesRelated}} Memes
                         </div>
                 </div>
-                <hr/>
+                <br/>
             </div>
           </div>
             <div *ngIf="tabSelected === 2"> 
-                
+                <br/>
                 <div  *ngFor="let item of memes" >
-                    <div class="col-md-12 card text-center bg-dark">
+                    <div class="col-md-6 card text-center bg-dark">
                         <div class="card-header bg-dark text-white">
                           <a class="title" routerLink="/meme/{{item._id}}">{{item.title}} </a>
                         </div>
                         <div class="card-body">
                           <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
                         </div>
-                        <div class="card-footer bg-dark text-muted text-white">
-                           <button *ngIf="!item.isLiked" class="btn btn-info pull-left" (click)="newLikeMeme(item._id ,item.postId)" > <i class="fa fa-arrow-up"></i>  Like</button>
-                           <button *ngIf="item.isLiked" class="btn btn-info" (click)="dislikeMeme(item._id, item.postId)" > <i class="fa fa-arrow-down"></i>  Dislike</button>
-                
-                           <a> {{item.likes}} Likes |  {{item.comments}} Comments </a>
-                        </div>
-                      </div>
-                      <hr/>
+                        <div class="card-footer nobordertop bg-dark text-white row">
+                            <div class="col-md-6 card double-btn-footer text-center bg-dark">
+                              <a class="double-btn-footer" *ngIf="item.isLiked" (click)="dislikeMeme(item._id, item.postId)"> {{item.likes}}  <i class="far liked fa-arrow-alt-circle-up"></i>     </a>
+                              <a class="double-btn-footer" *ngIf="!item.isLiked" (click)="newLikeMeme(item._id, item.postId)"> {{item.likes}}  <i class="far fa-arrow-alt-circle-up"></i>     </a>
+                            </div>
+                            <div class="col-md-6 card double-btn-footer  text-center bg-dark">
+                              <a class="double-btn-footer" routerLink="/meme/{{item._id}}" >  {{item.comments}}  <i class="fas fa-comment"></i> </a>
+                            </div>
+                          </div>
+                    </div>
+                    <br/>
+                      
                     
                 </div>
             </div>
             <div *ngIf="tabSelected === 3"> 
-
+              <br/>
                 <div  *ngFor="let item of memesLiked" >
-                    <div class="col-md-12 card text-center bg-dark">
+                    <div class="col-md-6 card text-center bg-dark">
                         <div class="card-header bg-dark text-white">
                           <a class="title" routerLink="/meme/{{item._id}}">{{item.title}} </a>
                         </div>
                         <div class="card-body">
                           <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
                         </div>
-                        <div class="card-footer bg-dark text-muted text-white">
-                           <button *ngIf="!item.isLiked" class="btn btn-info pull-left" (click)="newLikeMemeLiked(item._id ,item.postId)" > <i class="fa fa-arrow-up"></i>  Like</button>
-                           <button *ngIf="item.isLiked" class="btn btn-info" (click)="dislikeMemeLiked(item._id, item.postId)" > <i class="fa fa-arrow-down"></i>  Dislike</button>
-                
-                           <a> {{item.likes}} Likes |  {{item.comments}} Comments </a>
+                        <div class="card-footer nobordertop bg-dark text-muted text-white row">
+                            <div class="col-md-6 card double-btn-footer text-center bg-dark">
+                                <a class="double-btn-footer" *ngIf="item.isLiked" (click)="dislikeMemeLiked(item._id, item.postId)"> {{item.likes}}  <i class="far liked fa-arrow-alt-circle-up"></i>     </a>
+                                <a class="double-btn-footer" *ngIf="!item.isLiked" (click)="newLikeMemeLiked(item._id, item.postId)"> {{item.likes}}  <i class="far fa-arrow-alt-circle-up"></i>     </a>
+                              </div>
+                              <div class="col-md-6 card double-btn-footer  text-center bg-dark">
+                                <a class="double-btn-footer" routerLink="/meme/{{item._id}}" >  {{item.comments}}  <i class="fas fa-comment"></i> </a>
+                              </div>
                         </div>
                       </div>
-                      <hr/>
-                    
-                </div>
-                
-
-            </div>
-        </div>
+                      
+                      <br/>
+                </div>          
+     
     <hr/>
 </div>

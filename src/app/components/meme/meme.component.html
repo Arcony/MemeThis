@@ -51,10 +51,11 @@
                     <div class="media-body">
                       <div class="form-group basic-textarea rounded-corners">
                         <textarea name="reply"   [(ngModel)]="reply" (ngModelChange)="reply = $event" class="form-control z-depth-1" id="commentaire" rows="3" placeholder="Write your comment..."></textarea>
-                        <button class="btn btn-info float-right margin-top-10" (click)="newCommentComment(this.reply,item._id)">Send</button>
+                        <button class="btn btn-info float-right margin-top-10" (click)="newCommentComment(this.reply,item._id,i)">Send</button>
                       </div>
                     </div>
                 </div>
+                <br/>
             </div>
     </div>
     <hr/>

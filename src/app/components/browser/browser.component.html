@@ -1,4 +1,21 @@
 
+<div class="col-md-6 card text-center padding-none bg-dark">
+<div class="card-header bg-dark text-white padding-none row ">
+        <div class="col-md-4 card padding-none double-btn-footer text-center bg-dark">
+                        <a [className]="tabActivated === 1 ? 'active' : ''" (click)="selectTab(1)" >Hot</a>
+        </div>
+        <div class="col-md-4 card padding-none double-btn-footer text-center bg-dark">
+                        <a [className]="tabActivated === 2 ? 'active' : ''" (click)="selectTab(2)" >Fresh</a>
+        </div>
+        <div class="col-md-4 card padding-none double-btn-footer text-center bg-dark">
+                        <a [className]="tabActivated === 3 ? 'active' : ''" (click)="selectTab(3)" >Best</a>
+        </div>
+</div>
+</div>
+
+<br/>
+<br/>
+        
 
 <div *ngFor="let item of posts">
         <div class="col-md-6 card text-center bg-dark">

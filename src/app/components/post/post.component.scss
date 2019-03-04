@@ -1,3 +1,4 @@
+@import './../../../variables.scss';
 
 
 .img-responsive {
@@ -14,12 +15,12 @@
 }
 
 a {
-    color: white;
+    color: $textColor;
     font-size: 20px;
 }
 
 a:hover{
-    color: #0099ff !important;
+    color: $highLight !important;
     text-decoration: none;
     cursor : pointer;
 }
@@ -31,7 +32,7 @@ a:hover{
 }
 
 .title:hover {
-  color: #0099ff;
+  color: $highLight;
 }
 
 .card-nobot {
@@ -43,7 +44,7 @@ a:hover{
 }
 
 .liked{
-  color: #0099ff !important;
+  color: $highLight !important;
 }
 
 .double-btn-footer {
@@ -51,6 +52,10 @@ a:hover{
 }
 
 .double-btn-footer:hover {
-  background-color: #343a43;
+  background-color: $cardBackground;
+}
+
+div {
+  border-width: 2px;
 }
 

@@ -49,7 +49,7 @@ export class ProfilComponent implements OnInit {
     this.userService.getUser(this.id)
     .subscribe((data : User) => {
       this.userFetch = data;
-      console.log(data);
+      console.log("userFetch",data);
     });
     this.userService.getMyself().subscribe((data : User) => {
       console.log(data);
@@ -173,7 +173,7 @@ export class ProfilComponent implements OnInit {
 
   fetchMemesLikesAndComments(userId) {
     this.memeService
-    .getMemesLikesAndCommentsForProfil(userId)
+    .getMemesLikesAndCommentsForProfil(this.userFetch.userId)
     .subscribe((data: Meme[] ) => {
         this.memes = data;
 
@@ -181,14 +181,11 @@ export class ProfilComponent implements OnInit {
   }
 
   fetchLikedMemes() {
-    console.log("fetch now all liked meme")
     this.memeService
-    .getMemesLikedForProfil(this.userFetch.userId)
+    .getMemesLikesAndCommentsForProfil(this.userFetch.userId)
     .subscribe((data: Meme[] ) =>{
-      console.log("then");
-      console.log(this.memesLiked)
-        this.memesLiked = data;
-      console.log(this.memesLiked)
+        this.memes = data;
     });
-  }
+}
+
 }

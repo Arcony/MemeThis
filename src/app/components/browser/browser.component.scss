@@ -1,5 +1,6 @@
  
   
+@import './../../../variables.scss';
 
 .img-responsive {
   max-width: 400px;
@@ -15,12 +16,12 @@
 }
 
 a {
-    color: white;
+    color: $textColor ;
     font-size: 20px;
 }
 
 a:hover{
-    color: grey;
+    color: $highLight;
     text-decoration: none;
 }
 
@@ -31,9 +32,40 @@ a:hover{
 }
 
 .title:hover {
-  color: #0099ff
+  color: $highLight
 }
 
 .card-header {
   padding-bottom: 0px;
+  border-width: 2px;
+}
+.double-btn-footer {
+  line-height: 3em;
+  
+}
+
+.double-btn-footer:hover {
+  background-color: $cardBackground;
+  
+}
+
+
+.active {
+  color : $highLight !important;
+  background-color: $activeTab;
+}
+
+
+a {
+  cursor : pointer; 
+  color: $textColor;
+  text-decoration: none;
+}
+
+a:hover{
+  color : $highLight !important;
+}
+
+div {
+  border-width: 2px;
 }

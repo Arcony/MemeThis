@@ -1,8 +1,7 @@
+@import './../../../variables.scss';
 
   body {
-    font-family: "Poppins", sans-serif;
-    height: 100vh;
-    background-color: grey;
+    font-family: "Impact", sans-serif;
   }
 
 .img-responsive {
@@ -20,12 +19,12 @@
 
 
 a {
-    color: white;
+    color: $textColor;
     font-size: 20px;
 }
 
 a:hover{
-    color: grey;
+    color: $highLight;
     text-decoration: none;
 }
 
@@ -75,9 +74,12 @@ textarea{
   }
   
   .title:hover {
-    color: #0099ff
+    color: $highLight
   }
 
   .card-header {
     padding-bottom: 0px;
 }
+div {
+    border-width: 2px;
+  }

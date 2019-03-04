@@ -1,8 +1,8 @@
+@import './../../../variables.scss';
+
 
   body {
-    font-family: "Poppins", sans-serif;
-    height: 100vh;
-    background-color: grey;
+    font-family: "Impact", sans-serif;
   }
 
 .img-responsive {
@@ -18,15 +18,15 @@
     margin-bottom: 10px; /* Added */
 }
 
+.card-nobot {
+    padding-bottom: 0;
+  }
+
 /***
 User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
 Licensed under MIT
 ***/
-
-body {
-    background: #F1F3FA;
-  }
   
   /* Profile container */
   .profile {
@@ -35,9 +35,7 @@ body {
   
   /* Profile sidebar */
   .profile-sidebar {
-    padding: 20px 0 10px 0;
-    background: #fff;
-  }
+    padding: 20px 0 10px 0; }
   
   .profile-userpic img {
     float: none;
@@ -54,93 +52,10 @@ body {
     margin-top: 20px;
   }
   
-  .profile-usertitle-name {
-    color: #5a7391;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 7px;
-  }
-  
-  .profile-usertitle-job {
-    text-transform: uppercase;
-    color: #5b9bd1;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 15px;
-  }
-  
-  .profile-userbuttons {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .profile-userbuttons .btn {
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 15px;
-    margin-right: 5px;
-  }
-  
-  .profile-userbuttons .btn:last-child {
-    margin-right: 0px;
-  }
-      
-  .profile-usermenu {
-    margin-top: 30px;
-  }
-  
-  .profile-usermenu ul li {
-    border-bottom: 1px solid #f0f4f7;
-  }
-  
-  .profile-usermenu ul li:last-child {
-    border-bottom: none;
-  }
-  
-  .profile-usermenu ul li a {
-    color: #93a3b5;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  
-  .profile-usermenu ul li a i {
-    margin-right: 8px;
-    font-size: 14px;
-  }
-  
-  .profile-usermenu ul li a:hover {
-    background-color: #fafcfd;
-    color: #5b9bd1;
-  }
-  
-  .profile-usermenu ul li.active {
-    border-bottom: none;
-  }
-  
-  .profile-usermenu ul li.active a {
-    color: #5b9bd1;
-    background-color: #f6f9fb;
-    border-left: 2px solid #5b9bd1;
-    margin-left: -2px;
-  }
-  
-  /* Profile Content */
-  .profile-content {
-    padding: 20px;
-    background: #fff;
-    min-height: 460px;
-  }
-
-
-
-  //////@at-root
-
-  
 input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: $btnColor;
     border: none;
-    color: white;
+    color: $textColor;
     padding: 15px 80px;
     text-align: center;
     text-decoration: none;
@@ -160,7 +75,7 @@ input[type=button], input[type=submit], input[type=reset]  {
   }
   
   input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #39ace7;
+    background-color: $btnColorHover;
   }
   
   input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -205,9 +120,6 @@ input[type=button], input[type=submit], input[type=reset]  {
     cursor: pointer;
     font-weight: bold;
 }
-.label-file:hover {
-    color: #25a5c4;
-}
 
 // et on masque le input
 .input-file {
@@ -220,12 +132,12 @@ input[type=button], input[type=submit], input[type=reset]  {
 
 a {
     cursor : pointer; 
-    color: white;
+    color: $textColor;
     text-decoration: none;
 }
 
 .active {
-    background: grey;
+    background: $activeTab;
 }
 
 .title {
@@ -234,5 +146,47 @@ a {
   }
   
   .title:hover {
-    color: #0099ff;
+    color: $highLight;
+  }
+
+  .double-btn-footer {
+    line-height: 3em;
+    padding: 0 0 0 0;
+  }
+  
+  .double-btn-footer:hover {
+    background-color: $cardBackground !important;
+  }
+  
+  .noborderbot {
+    border-bottom: none;
+  }
+
+  .nobordertop {
+    border-top: none;
+  }
+
+  .liked{
+    color: $highLight !important;
+  }
+  .card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+div {
+    border-width: 2px !important;
+  }
+  
+
+  .double-btn-footer {
+    line-height: 3em;
+    background-color: $cardBackground;
+    color: white;
+    
+  }
+  
+  .double-btn-footer:hover {
+    background-color: $cardBackground;
+    
   }

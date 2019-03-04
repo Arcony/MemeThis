@@ -18,6 +18,14 @@ export class PostService {
     return this.http.get('http://localhost:8080/allPostMemes');
   }
 
+  getPostsAndMemesHot () {
+    return this.http.get('http://localhost:8080/memesHot');
+  }
+
+  getPostsAndMemesBest () {
+    return this.http.get('http://localhost:8080/memesBest');
+  }
+
   getPostsAndMemesForProfil (id) {
     return this.http.get('http://localhost:8080/allPostMemesForProfil/'+id);
   }

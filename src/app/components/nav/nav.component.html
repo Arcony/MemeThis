@@ -3,12 +3,12 @@
         <div class="navbar-expand mr-auto">
           <div class="navbar-nav">
             <a class="nav-item nav-link" [routerLink]="'/user/' + userId" >{{username}}</a>
-            <button class="btn btn-danger nav-item nav-link text-white" (click)="this.logOut()">Logout</button>
             
           </div>
         </div>
         <div class="nav navbar-right">
-            <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="this.formModal.show();" mdbWavesEffect>Upload</button>       
+                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="this.formModal.show();" mdbWavesEffect>Upload</button>       
+                <button class="btn btn-danger nav-item nav-link text-white btn-circle float-right" (click)="this.logOut()"><i class="fas fa-power-off"></i></button>
         </div>
       </nav>
 
@@ -25,8 +25,8 @@
                   <div class="modal-body text-center mb-1">
                       <div class="md-form ml-0 mr-0">
                           <form class="form-group" >
-                              <input type="text" #title id="title" class="fadeIn second" name="title" placeholder="Write a title">
-                              <input type="text" #tag id="tag"  class="fadeIn second" name="tag" placeholder="Choose One Tag"  oninput="this.value = this.value.toLowerCase()">
+                              <input autocomplete="off" type="text" #title id="title" class="fadeIn second" name="title" placeholder="Write a title">
+                              <input autocomplete="off" type="text" #tag id="tag"  class="fadeIn second" name="tag" placeholder="Choose One Tag"  oninput="this.value = this.value.toLowerCase()">
                               <input type="file"  (change)="onFileChange($event)" #content id="content" class="fadeIn second" name="content" placeholder="content">
                           </form>
                             <br>

@@ -7,8 +7,9 @@
 <app-canvas *ngIf="postContent" (messageEvent)="receiveMessage($event)" [postContent]="postContent" [postId]="postId"></app-canvas>
 </div>
 </div>
-
+<br>
 <hr />
+<br>
 <div  *ngFor="let item of memes" >
     <div class="col-md-6 card text-center bg-dark">
         <div class="card-header bg-dark text-white">
