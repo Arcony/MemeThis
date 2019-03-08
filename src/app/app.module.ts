@@ -17,6 +17,7 @@ import { ModalModule, WavesModule, InputsModule, MDBBootstrapModule } from 'angu
 import {  ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
 import { MemeComponent } from './components/meme/meme.component';
+import { NotificationService } from './services/notification.service';
 
 
 const routes: Routes = [
@@ -64,7 +65,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
     ],
-  providers: [],
+  providers: [NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

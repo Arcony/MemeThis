@@ -8,7 +8,7 @@ import { AuthService } from './../../services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { MemeService } from 'src/app/services/meme.service';
 import { LikeService } from 'src/app/services/like.service';
-
+import { NotificationService } from 'src/app/services/notification.service';
 
 import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
@@ -30,7 +30,7 @@ export class PostComponent implements OnInit {
   that = this;
   meme : Meme;
 
-  constructor(private router: Router, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private notificationService: NotificationService, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -78,18 +78,29 @@ export class PostComponent implements OnInit {
     .newLike(memeId,postId,commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
+        console.log(data.userId)
+        this.notificationService.createNotificationForLike(data.userId , postId, data._id , memeId)
+        .subscribe((data: Notification) => {
+          console.log(data);
+        })
         this.that.fetchMemesLikesAndComments(postId);
     });
   }
 
   dislikeMeme(memeId,postId,commentId) {
-    console.log("dislike call");
+    console.log("dislike call",memeId,postId,commentId);
     this.likeService
     .dislike(memeId,postId,commentId)
     .subscribe((data: Meme ) => {
-        this.meme = data;
+        console.log(postId , memeId , commentId)
+        this.notificationService.unlikeNotificationUpdate(postId , memeId)
+        .subscribe((data: Notification) => {
+          console.log(data);
+        })
         this.fetchMemesLikesAndComments(postId);
     });
   }
+
+  
   
 }

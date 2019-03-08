@@ -32,7 +32,6 @@ export class CanvasComponent implements AfterViewInit {
   @Input() public height = 600;
   @Input() postId: string;
   @Input() postContent: string;
-  @Output() messageEvent = new EventEmitter<string>();
   
 
   private cx: CanvasRenderingContext2D;
@@ -136,7 +135,6 @@ postCanvas(title,tag, topText, botText) {
       .newMeme(file, that.postId ,title,tag)
       .subscribe((data: Meme) =>{
         that.meme = data;
-        that.messageEvent.emit(that.postId);
         var date = new Date;
         localStorage.setItem("lastUpdate", date.toString());
       });

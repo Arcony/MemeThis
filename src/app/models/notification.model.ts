@@ -5,5 +5,9 @@ export interface Notification {
     userId: string;
     likeId: string;
     commentId: string;
+    text: string;
+    type: string;
+    seen: Boolean;
+    newNotifNb : number;
   }
   

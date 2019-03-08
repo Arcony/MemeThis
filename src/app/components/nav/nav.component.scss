@@ -98,3 +98,19 @@ input[type=button], input[type=submit], input[type=reset]  {
 div {
   border-width: 2px;
 }
+
+.notification {
+  padding : 20px 20px 0 20px;
+  cursor : pointer;
+}
+.notification + .notification {
+  padding : 0 20px 0 20px;
+}
+
+.notification-new {
+  color : $newNotificationTextColor !important;
+
+}
+h5 {
+  padding-top: 5px;
+}

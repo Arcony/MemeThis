@@ -6,11 +6,28 @@
             
           </div>
         </div>
-        <div class="nav navbar-right">
-                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="this.formModal.show();" mdbWavesEffect>Upload</button>       
+        <div *ngIf="username" class="nav navbar-right">
+                <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="this.formModal.show();" mdbWavesEffect>Upload</button>
+                <button class="btn btn-danger nav-item nav-link text-white btn-circle float-right" (click)="this.triggerNotification()"> <H5 *ngIf="newNotifNb >= 1" > {{newNotifNb}} </H5><i *ngIf="newNotifNb < 1" class="fas fa-bell"></i></button>       
                 <button class="btn btn-danger nav-item nav-link text-white btn-circle float-right" (click)="this.logOut()"><i class="fas fa-power-off"></i></button>
         </div>
       </nav>
+
+      <div  *ngIf="notificationTrigger" class="modal-body col-md-3 float-right text-center text-white" style="position:absolute;top:6em;right:0;">
+            <div class="col-md-12 card text-center bg-dark">
+                    <div class="card-header text-left float-left bg-dark text-white" style="padding : 18px 20px 18px 20px;">
+                            Notifications :  
+                    </div>
+                    <div *ngFor="let item of notifications" class="card-body notification text-left ">
+
+                           <a [ngClass]=" item.clicked ? '' : 'notification-new' " (click)="clickNotification(item._id,item.seen,item.itemTargeted)" >{{item.relatable}}{{item.text}} </a>
+                    <hr/>
+                    </div>
+            </div>
+        </div>
+
+
+
 
       <div mdbModal #form="mdb-modal" class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
