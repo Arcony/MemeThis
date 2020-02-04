@@ -21,10 +21,10 @@ import { Post } from '../../models/post.model';
 })
 export class BrowserComponent implements OnInit {
 
-  posts : Post[];
-  post : Post;
-  tabActivated : number;
-  constructor(private router: Router, private postService: PostService,) { }
+  posts: Post[];
+  post: Post;
+  tabActivated: number;
+  constructor(private router: Router, private postService: PostService) { }
 
   ngOnInit() {
     this.tabActivated = 1;
@@ -34,7 +34,7 @@ export class BrowserComponent implements OnInit {
   fetchPosts() {
     this.postService
     .getPostsAndMemes()
-    .subscribe((data: Post[] ) =>{
+    .subscribe((data: Post[] ) => {
         this.posts = data;
     });
   }
@@ -43,7 +43,7 @@ export class BrowserComponent implements OnInit {
   fetchPostsHot() {
     this.postService
     .getPostsAndMemesHot()
-    .subscribe((data: Post[] ) =>{
+    .subscribe((data: Post[] ) => {
         this.posts = data;
     });
   }
@@ -51,7 +51,7 @@ export class BrowserComponent implements OnInit {
   fetchPostsBest() {
     this.postService
     .getPostsAndMemesBest()
-    .subscribe((data: Post[] ) =>{
+    .subscribe((data: Post[] ) => {
         this.posts = data;
     });
   }
@@ -59,22 +59,20 @@ export class BrowserComponent implements OnInit {
   countPostMemes(postId) {
     this.postService
     .countPostMemes(postId)
-    .subscribe((data: string ) =>{
+    .subscribe((data: string ) => {
         return data;
     });
   }
 
-
-  
   selectTab(value) {
     this.tabActivated = value;
-    if(value === 1) {
+    if (value === 1) {
       this.fetchPostsHot();
     }
-    if(value === 2) {
+    if (value === 2) {
       this.fetchPosts();
     }
-    if(value === 3) {
+    if (value === 3) {
      this.fetchPostsBest();
     }
   }

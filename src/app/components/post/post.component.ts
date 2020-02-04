@@ -13,6 +13,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { User } from '../../models/user.model';
 import { Post } from '../../models/post.model';
 import { Meme } from '../../models/meme.model';
+import { ComponentCommunicationService } from 'src/app/services/component-communication.service';
 
 
 @Component({
@@ -22,30 +23,38 @@ import { Meme } from '../../models/meme.model';
 })
 export class PostComponent implements OnInit {
 
-  memes : Meme[];
-  post : Post;
-  postId : string;
-  postContent : string;
-  message:string;
+  memes: Meme[];
+  post: Post;
+  postId: string;
+  postContent: string;
+  message: string;
   that = this;
-  meme : Meme;
+  meme: Meme;
 
-  constructor(private router: Router, private notificationService: NotificationService, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { }
+  constructor(
+    private router: Router,
+    private notificationService: NotificationService,
+    private componentCommunicationService: ComponentCommunicationService,
+    private likeService: LikeService,
+    private postService: PostService,
+    private memeService: MemeService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     this.fetchPost(id);
     this.postId = id;
     this.fetchMemesLikesAndComments(this.postId);
+    this.componentCommunicationService.updateMemes.subscribe((refresh: boolean) => this.fetchMemesLikesAndComments(this.postId));
   }
 
   fetchPost(id) {
     this.postService
     .getPost(id)
     .subscribe((data: Post ) => {
-        this.post = data; 
-        this.postContent = data.content;     
-    }); 
+        this.post = data;
+        this.postContent = data.content;
+    });
   }
 
   fetchMemes(id) {
@@ -58,13 +67,10 @@ export class PostComponent implements OnInit {
 
 
   fetchMemesLikesAndComments(id) {
-    console.log("Begin FETCH");
     this.memeService
     .getMemesLikesAndComments(id)
     .subscribe((data: Meme[] ) => {
-        console.log("DATA BEFORE FETCH" ,this.memes)
         this.memes = data;
-        console.log("DATA AFTER FETCH" ,this.memes)
     });
   }
 
@@ -72,35 +78,28 @@ export class PostComponent implements OnInit {
     this.fetchMemesLikesAndComments($event);
   }
 
-  newLikeMeme(memeId,postId,commentId) {
-    console.log("like call");
+  newLikeMeme(memeId, postId, commentId) {
     this.likeService
-    .newLike(memeId,postId,commentId)
+    .newLike(memeId, postId, commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
-        console.log(data.userId)
         this.notificationService.createNotificationForLike(data.userId , postId, data._id , memeId)
-        .subscribe((data: Notification) => {
-          console.log(data);
-        })
+        .subscribe((retour: Notification) => {
+          console.log(retour);
+        });
         this.that.fetchMemesLikesAndComments(postId);
     });
   }
 
-  dislikeMeme(memeId,postId,commentId) {
-    console.log("dislike call",memeId,postId,commentId);
+  dislikeMeme(memeId, postId, commentId) {
     this.likeService
-    .dislike(memeId,postId,commentId)
+    .dislike(memeId, postId, commentId)
     .subscribe((data: Meme ) => {
-        console.log(postId , memeId , commentId)
         this.notificationService.unlikeNotificationUpdate(postId , memeId)
-        .subscribe((data: Notification) => {
-          console.log(data);
-        })
+        .subscribe((retour: Notification) => {
+          console.log(retour);
+        });
         this.fetchMemesLikesAndComments(postId);
     });
   }
-
-  
-  
 }

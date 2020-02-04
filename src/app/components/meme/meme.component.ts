@@ -1,4 +1,4 @@
-import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -26,21 +26,29 @@ import { Notification } from '../../models/notification.model';
 })
 export class MemeComponent implements OnInit {
 
-  meme : Meme;
+  meme: Meme;
   comments: Comment[];
   userConnected: User;
   message: string;
   replyActivate: number;
   reply: string;
   seeResponse: number;
-  constructor(private router: Router, private notificationService: NotificationService, private userService: UserService, private commentService: CommentService, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { 
+  constructor(
+  private router: Router,
+  private notificationService: NotificationService,
+  private userService: UserService,
+  private commentService: CommentService,
+  private likeService: LikeService,
+  private postService: PostService,
+  private memeService: MemeService,
+  private route: ActivatedRoute) {
+
     notificationService.MemeState$.subscribe(
       response => {
         this.loadPage(response);
       }
     );
   }
-  
   ngOnInit() {
     this.loadPage(this.route.snapshot.paramMap.get('memeId'));
   }
@@ -48,65 +56,64 @@ export class MemeComponent implements OnInit {
   loadPage(memeId) {
     this.fetchMeme(memeId);
     this.fetchMemeComments(memeId);
-    this.userService.getMyself().subscribe((data : User) => {
+    this.userService.getMyself().subscribe((data: User) => {
       this.userConnected = data;
     });
   }
 
   fetchMeme(memeId) {
     this.memeService
-    .getMeme(memeId)
-    .subscribe((data: Meme ) => {
+      .getMeme(memeId)
+      .subscribe((data: Meme) => {
         this.meme = data;
-    });
+      });
   }
 
   fetchMemeComments(memeId) {
     this.commentService
-    .getMemeComments(memeId)
-    .subscribe((data: Comment[] ) => {
-      this.message = '';
+      .getMemeComments(memeId)
+      .subscribe((data: Comment[]) => {
+        this.message = '';
         this.comments = data;
-    });
+      });
   }
 
-  newCommentComment(text,commentId,indexReplyBox) {
+  newCommentComment(text, commentId, indexReplyBox) {
     const memeId = this.meme._id;
     const postId = this.meme.postId;
     this.commentService
-    .newCommentComment(memeId,postId,text,commentId)
-    .subscribe((data: Comment ) => {
+      .newCommentComment(memeId, postId, text, commentId)
+      .subscribe((data: Comment) => {
 
-       this.fetchMemeComments(memeId);
-       this.activeResponse(indexReplyBox);
-    });
+        this.fetchMemeComments(memeId);
+        this.activeResponse(indexReplyBox);
+      });
   }
-  
+
   newCommentMeme(text) {
     const memeId = this.meme._id;
     const postId = this.meme.postId;
     this.commentService
-    .newComment(memeId,postId,text)
-    .subscribe((data: Comment ) => {
-      this.fetchMemeComments(memeId);
-      this.notificationService
-      .createNotificationForComment( this.meme.userId , this.meme.postId, data._id , this.meme._id)
-      .subscribe((data: Notification) => {
-      })
-    });
+      .newComment(memeId, postId, text)
+      .subscribe((data: Comment) => {
+        this.fetchMemeComments(memeId);
+        this.notificationService
+          .createNotificationForComment(this.meme.userId, this.meme.postId, data._id, this.meme._id)
+          .subscribe((retour: Notification) => {
+          });
+      });
   }
 
-  activeReply(value,replyTarget) {
-    if(value != this.replyActivate)
-    {
-    this.replyActivate = value;
-    this.reply = '@'+replyTarget;
+  activeReply(value, replyTarget) {
+    if (value !== this.replyActivate) {
+      this.replyActivate = value;
+      this.reply = '@' + replyTarget;
     }
   }
 
   activeResponse(value) {
     this.seeResponse = value;
     this.replyActivate = -1;
-    this.reply = ''
+    this.reply = '';
   }
 }

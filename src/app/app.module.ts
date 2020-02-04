@@ -5,7 +5,17 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
-import { MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule } from '@angular/material';
+import { MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatIconModule,
+  MatButtonModule,
+  MatCardModule,
+  MatTableModule,
+  MatDividerModule,
+  MatSnackBarModule } from '@angular/material';
 import { RouterModule, Routes, CanActivate} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/register/register.component';
@@ -13,11 +23,12 @@ import { BrowserComponent } from './components/browser/browser.component';
 import { AuthGuard } from './auth.guard';
 import { PostComponent } from './components/post/post.component';
 import { CanvasComponent } from './components/canvas/canvas.component';
-import { ModalModule, WavesModule, InputsModule, MDBBootstrapModule } from 'angular-bootstrap-md'
+import { ModalModule, WavesModule, InputsModule, MDBBootstrapModule } from 'angular-bootstrap-md';
 import {  ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { ProfilComponent } from './components/profil/profil.component';
 import { MemeComponent } from './components/meme/meme.component';
 import { NotificationService } from './services/notification.service';
+import { ComponentCommunicationService } from './services/component-communication.service';
 
 
 const routes: Routes = [
@@ -65,7 +76,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
     ],
-  providers: [NotificationService],
+  providers: [NotificationService, ComponentCommunicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,10 +3,9 @@
 
 
       <div class="fadeIn first">
-          <img style="max-height:50px;max-width:50px;"src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo_TV_2015.png/280px-Logo_TV_2015.png" id="icon" alt="User Icon" />
       </div>
         <form [formGroup]="createForm" >
-          <input type="text" #email id="email" formControlName="email" class="fadeIn second" name="email" placeholder="email"  oninput="this.value = this.value.toLowerCase()">
+          <input type="text" #email id="email" formControlName="email" class="fadeIn second mt-5" name="email" placeholder="email"  oninput="this.value = this.value.toLowerCase()">
           <input type="password" #password id="password" formControlName="password" class="fadeIn third" name="password" placeholder="password">
           <input type="submit" class="fadeIn fourth" value="Log In" (click)="signIn(email.value, password.value)">
 
