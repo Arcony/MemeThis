@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { SERVER_API_URL } from './../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +21,16 @@ export class MemeService {
     testData.append('title', title );
     testData.append('tag', tag );
 
-    return this.http.post('http://localhost:8080/newMeme', testData, {headers} );
+    return this.http.post(SERVER_API_URL + '/newMeme', testData, {headers} );
   }
 
 
   getMemes (id) {
-    return this.http.get('http://localhost:8080/allPostMemes/' + id);
+    return this.http.get(SERVER_API_URL + '/allPostMemes/' + id);
   }
 
   getMeme (memeId) {
-    return this.http.get('http://localhost:8080/meme/' + memeId);
+    return this.http.get(SERVER_API_URL + '/meme/' + memeId);
   }
 
   getMemesLikesAndComments (postId) {
@@ -37,7 +38,7 @@ export class MemeService {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get('http://localhost:8080/allMemesLikesComments/' + postId,  {headers});
+    return this.http.get(SERVER_API_URL + '/allMemesLikesComments/' + postId,  {headers});
   }
 
   getMemesLikesAndCommentsForProfil (userId) {
@@ -45,7 +46,7 @@ export class MemeService {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get('http://localhost:8080/allMemesLikesCommentsForProfil/' + userId,  {headers});
+    return this.http.get(SERVER_API_URL + '/allMemesLikesCommentsForProfil/' + userId,  {headers});
   }
 
   getMemesLikedForProfil (userId) {
@@ -53,6 +54,6 @@ export class MemeService {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get('http://localhost:8080/allMemesLikedForProfil/' + userId,  {headers});
+    return this.http.get(SERVER_API_URL + '/allMemesLikedForProfil/' + userId,  {headers});
   }
 }

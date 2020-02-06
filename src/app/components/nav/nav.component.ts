@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
   @ViewChild('form') public formModal: any;
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor (
+  constructor(
     private modal: ModalModule,
     private fb: FormBuilder,
     private router: Router,
@@ -117,10 +117,10 @@ export class NavComponent implements OnInit {
         .subscribe((data: Post) => {
           if (data) {
             this.post = data;
-            this.router.navigate(['post/' + this.post._id]);
             const newDate = new Date;
             localStorage.setItem('lastUpdlastMemeGeneratedate', newDate.toString());
             this.formModal.hide();
+            this.router.navigate(['post/' + this.post._id]);
           }
         });
     }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http' 
+import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { SERVER_API_URL } from './../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,39 +11,36 @@ export class UserService {
 
 
   getUser(id) {
-    return this.http.get('http://localhost:8080/customer/'+ id);
+    return this.http.get(SERVER_API_URL + '/customer/' + id);
   }
 
   getMyself() {
 
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.get('http://localhost:8080/getMyself/',{headers});
+    return this.http.get(SERVER_API_URL + '/getMyself/', {headers});
   }
 
   updateMyself( oldPassword, newPassword , content) {
-    
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-    console.log()
-    let testData: FormData = new FormData();
-    if( newPassword && oldPassword && !content.get('picture')) {
+
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    const testData: FormData = new FormData();
+    if ( newPassword && oldPassword && !content.get('picture')) {
       const data =  {
         newPassword: newPassword,
         oldPassword: oldPassword
-      }
-     return this.http.put('http://localhost:8080/updateMyselfPassword/',data,{headers});
-    }
-     else if( !newPassword && !oldPassword && content.get('picture')) {
+      };
+     return this.http.put(SERVER_API_URL + '/updateMyselfPassword/', data, {headers});
+    } else if ( !newPassword && !oldPassword && content.get('picture')) {
       testData.append('picture', content.get('picture') );
-     return this.http.put('http://localhost:8080/updateMyselfPicture/',testData,{headers});
-     }
-     else if( newPassword && oldPassword && content.get('picture')) {
+     return this.http.put(SERVER_API_URL + '/updateMyselfPicture/', testData, {headers});
+     } else if ( newPassword && oldPassword && content.get('picture')) {
       testData.append('picture', content.get('picture') );
       testData.append('newPassword', newPassword );
       testData.append('oldPassword', oldPassword );
-     return this.http.put('http://localhost:8080/updateMyselfAll/',testData,{headers});
+     return this.http.put(SERVER_API_URL + '/updateMyselfAll/', testData, {headers});
      }
   }
 }

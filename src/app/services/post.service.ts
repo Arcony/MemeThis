@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders} from '@angular/common/http';
+import { SERVER_API_URL } from './../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,27 +11,27 @@ export class PostService {
 
 
   getPosts () {
-    return this.http.get('http://localhost:8080/allPost');
+    return this.http.get(SERVER_API_URL + '/allPost');
   }
 
   getPostsAndMemes () {
-    return this.http.get('http://localhost:8080/allPostMemes');
+    return this.http.get(SERVER_API_URL + '/allPostMemes');
   }
 
   getPostsAndMemesHot () {
-    return this.http.get('http://localhost:8080/memesHot');
+    return this.http.get(SERVER_API_URL + '/memesHot');
   }
 
   getPostsAndMemesBest () {
-    return this.http.get('http://localhost:8080/memesBest');
+    return this.http.get(SERVER_API_URL + '/memesBest');
   }
 
   getPostsAndMemesForProfil (id) {
-    return this.http.get('http://localhost:8080/allPostMemesForProfil/' + id);
+    return this.http.get(SERVER_API_URL + '/allPostMemesForProfil/' + id);
   }
 
   getPost (id) {
-    return this.http.get('http://localhost:8080/post/' + id);
+    return this.http.get(SERVER_API_URL + '/post/' + id);
   }
 
   createPost (title, tag, content) {
@@ -42,11 +43,11 @@ export class PostService {
     testData.append('content', content.get('content') );
     testData.append('title', title );
     testData.append('tag', tag );
-    return this.http.post('http://localhost:8080/newpost/', testData, {headers} );
+    return this.http.post(SERVER_API_URL + '/newpost/', testData, {headers} );
   }
 
   countPostMemes (postId) {
-    return this.http.get('http://localhost:8080/countPostMemes/' + postId);
+    return this.http.get(SERVER_API_URL + '/countPostMemes/' + postId);
   }
 
 }

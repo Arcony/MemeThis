@@ -34,14 +34,14 @@ export class MemeComponent implements OnInit {
   reply: string;
   seeResponse: number;
   constructor(
-  private router: Router,
-  private notificationService: NotificationService,
-  private userService: UserService,
-  private commentService: CommentService,
-  private likeService: LikeService,
-  private postService: PostService,
-  private memeService: MemeService,
-  private route: ActivatedRoute) {
+    private router: Router,
+    private notificationService: NotificationService,
+    private userService: UserService,
+    private commentService: CommentService,
+    private likeService: LikeService,
+    private postService: PostService,
+    private memeService: MemeService,
+    private route: ActivatedRoute) {
 
     notificationService.MemeState$.subscribe(
       response => {
@@ -70,6 +70,7 @@ export class MemeComponent implements OnInit {
   }
 
   fetchMemeComments(memeId) {
+    this.comments = null;
     this.commentService
       .getMemeComments(memeId)
       .subscribe((data: Comment[]) => {

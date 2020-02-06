@@ -1,6 +1,6 @@
 <div class="col-md-6 card text-center bg-dark">
     <div class="card-header card-nobot  bg-dark text-white">
-        <p>Profil de {{userFetch?.username}} </p>
+        <p>{{userFetch?.username}}'s Profil </p>
     </div>
         <div class="card-body text-white">
             <div class="row">
@@ -9,7 +9,7 @@
                   <form class="form-group margin-top" >
                       <input type="text" #oldPassword id="oldPassword" class="fadeIn second" name="oldPassword" placeholder="Old password">
                       <input type="text" #newPassword id="newPassword"  class="fadeIn second" name="newPassword" placeholder="Write new password">
-                      <input type="text" #newPasswordBis id="newPasswordBis"  class="fadeIn second" name="newPasswordBis" placeholder="Write new password">
+                      <input type="text" #newPasswordBis id="newPasswordBis"  class="fadeIn second" name="newPasswordBis" placeholder="Confirm new password">
                       <hr />
                       <p> Change your avatar</p>
                       <input type="file"  (change)="onFileChange($event)" #content id="content" class="fadeIn second" name="content" placeholder="content">

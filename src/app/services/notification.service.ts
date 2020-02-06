@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http'
+import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { SERVER_API_URL } from './../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -24,89 +25,64 @@ refreshMeme( state: string ) {
   this.memeStateSource.next( state );
 }
 
-  createNotificationForComment( userId , postId ,commentId , memeId) {
+  createNotificationForComment( userId , postId , commentId , memeId) {
 
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-    console.log("test");
-
-    if( !postId || !userId ) {
-
-    }
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const notification =  {
       postId: postId,
       userId: userId,
       commentId : commentId,
       memeId : memeId,
       seen : false,
-      type : "comment"
-    }
-    console.log(notification)
-    return this.http.post('http://localhost:8080/createNotificationComment',notification ,{headers});    
+      type : 'comment'
+    };
+    return this.http.post(SERVER_API_URL + '/createNotificationComment', notification , {headers});
   }
 
-  createNotificationForLike( userId , postId ,commentId , memeId) {
+  createNotificationForLike( userId , postId , commentId , memeId) {
 
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-    console.log("test");
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    if( !postId || !userId ) {
-
-    }
     const notification =  {
       postId: postId,
       userId: userId,
       commentId : commentId,
       memeId : memeId,
       seen : false,
-      type : "like"
-    }
-    console.log(notification)
-    return this.http.post('http://localhost:8080/createNotificationLike',notification ,{headers});    
+      type : 'like'
+    };
+    return this.http.post(SERVER_API_URL + '/createNotificationLike', notification , {headers});
   }
 
   unlikeNotificationUpdate(postId , memeId ) {
-    console.log("ENTER HERE", postId , memeId)
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-    console.log("test");
-
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
     const notification =  {
       postId: postId,
       memeId : memeId,
-      type : "like"
-    }
-    console.log('UNLIKE CALL COTE FRONT',notification)
-    return this.http.post('http://localhost:8080/unlikeNotificationUpdate',notification ,{headers}); 
+      type : 'like'
+    };
+    return this.http.post(SERVER_API_URL + '/unlikeNotificationUpdate', notification , {headers});
   }
 
   getNotificationUser( userId ) {
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-
-    if( !userId ) {
-    }
-    console.log(userId);
-    return this.http.get('http://localhost:8080/getNotificationUser/'+userId ,{headers});  
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.get(SERVER_API_URL + '/getNotificationUser/' + userId , {headers});
   }
 
-  notificationClick( notificationId ) { 
-
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-
-    if( !notificationId ) {
-    }
-
-    return this.http.put('http://localhost:8080/ClickNotification/'+notificationId ,null,{headers});
+  notificationClick( notificationId ) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
+    return this.http.put(SERVER_API_URL + '/ClickNotification/' + notificationId , null, {headers});
   }
 
   notificationSeeAll ( ) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    var headers: HttpHeaders = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer '+ localStorage.getItem('token'));
-
-    return this.http.put('http://localhost:8080/seeNotification' ,null,{headers});
+    return this.http.put(SERVER_API_URL + '/seeNotification' , null, {headers});
   }
 }
