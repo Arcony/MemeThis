@@ -4,10 +4,7 @@ import { AuthService } from './../../services/auth.service';
 import { NotificationService } from './../../services/notification.service';
 
 import { Router } from '@angular/router';
-import { User } from '../../models/user.model'
-import { Meme } from '../../models/meme.model'
-import { FormsModule } from '@angular/forms';
-import { NavComponent } from '../nav/nav.component';
+import { User } from '../../models/user.model';
 
 
 @Component({

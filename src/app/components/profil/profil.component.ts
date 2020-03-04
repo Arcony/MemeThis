@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {ViewChild, ElementRef  } from '@angular/core';
 
+
 import { AuthService } from './../../services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { MemeService } from 'src/app/services/meme.service';
@@ -32,27 +33,33 @@ export class ProfilComponent implements OnInit {
   userConnected: User;
   errorMsg: String;
   posts: Post[];
-  formData:FormData = new FormData();
+  formData: FormData = new FormData();
   tabSelected: number;
   memes: Meme[];
   meme: Meme;
   memesLiked: Meme[];
+  files: File[] = [];
   @ViewChild ('form') public formModal: any;
   @ViewChild('fileInput') fileInput: ElementRef;
 
-  constructor(private router: Router,private fb: FormBuilder, private userService: UserService, private likeService: LikeService, private postService: PostService, private memeService: MemeService, private route: ActivatedRoute) { 
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private userService: UserService,
+    private likeService: LikeService,
+    private postService: PostService,
+    private memeService: MemeService,
+    private route: ActivatedRoute) {
     this.createForm();
   }
 
   ngOnInit() {
-   
     this.id = this.route.snapshot.params.id;
     this.userService.getUser(this.id)
-    .subscribe((data : User) => {
+    .subscribe((data: User) => {
       this.userFetch = data;
-      console.log("userFetch",data);
     });
-    this.userService.getMyself().subscribe((data : User) => {
+    this.userService.getMyself().subscribe((data: User) => {
       console.log(data);
       this.userConnected = data;
     });
@@ -65,111 +72,102 @@ export class ProfilComponent implements OnInit {
   }
 
   updateProfil(oldPassword, newPassword, newPasswordBis) {
-    if( (oldPassword || newPassword || newPasswordBis) && (!oldPassword || !newPassword || !newPasswordBis) ) {
-        this.errorMsg = "Missing Password Field";
-    }
-    else if( newPassword != newPasswordBis) {
-        this.errorMsg = "New passwords don't match";
+    if ( (oldPassword || newPassword || newPasswordBis) && (!oldPassword || !newPassword || !newPasswordBis) ) {
+        this.errorMsg = 'Missing Password Field';
+    } else if ( newPassword !== newPasswordBis) {
+        this.errorMsg = 'New passwords don\'t match';
     }
 
     this.userService
           .updateMyself(oldPassword, newPassword , this.formData)
-          .subscribe((data: User) =>{
-            if(data) {
+          .subscribe((data: User) => {
+            if (data) {
             this.userFetch = data;
-            }
-            else
-            {
-              this.errorMsg= "error";
+            this.files = [];
+            } else {
+              this.errorMsg = 'error';
             }
           });
 
   }
 
   onFileChange(event) {
-    
-  
-    let fileList: FileList = event.target.files;
-    console.log(event);
-    let file: File = fileList[0]; 
-    
-    if(file.type != "image/jpg" && file.type != "image/jpeg" && file.type != "image/png")
-    {
-      this.errorMsg="File extension can't be uploaded"
+    this.files.splice(this.files.indexOf(event), 1);
+    this.files.push(...event.addedFiles);
+    const file: File = event.addedFiles[0];
+    if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png') {
+      this.errorMsg = 'File extension can\'t be uploaded';
       return false;
-    }
-    else
-    {
-      this.errorMsg=""
+    } else {
+      this.errorMsg = '';
       this.formData.set('picture', null);
       this.formData.set('picture', file, file.name);
-      console.log(this.formData.get('picture'))
-    }       
+    }
+  }
+
+  onRemove(event) {
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
   selectTab(value) {
     this.tabSelected = value;
-    if(value === 1) {
-      console.log(this.userFetch)
+    if (value === 1) {
         this.postService
         .getPostsAndMemesForProfil(this.userFetch.userId)
-        .subscribe((data: Post[] ) =>{
+        .subscribe((data: Post[] ) => {
             this.posts = data;
         });
     }
-    if(value === 2) {
+    if (value === 2) {
       this.memeService
       .getMemesLikesAndCommentsForProfil(this.userFetch.userId)
-      .subscribe((data: Meme[] ) =>{
+      .subscribe((data: Meme[] ) => {
           this.memes = data;
       });
     }
-    if(value === 3) {
+    if (value === 3) {
       this.memeService
       .getMemesLikedForProfil(this.userFetch.userId)
-      .subscribe((data: Meme[] ) =>{
-        console.log(data);
+      .subscribe((data: Meme[] ) => {
           this.memesLiked = data;
-          
       });
     }
   }
 
-  newLikeMeme(memeId,postId,commentId) {
+  newLikeMeme(memeId, postId, commentId) {
     this.likeService
-    .newLike(memeId,postId,commentId)
+    .newLike(memeId, postId, commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
         this.fetchMemesLikesAndComments(this.userConnected.userId);
     });
   }
 
-  dislikeMeme(memeId,postId,commentId) {
+  dislikeMeme(memeId, postId, commentId) {
     this.likeService
-    .dislike(memeId,postId,commentId)
+    .dislike(memeId, postId, commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
         this.fetchMemesLikesAndComments(this.userConnected.userId);
     });
   }
 
-  newLikeMemeLiked(memeId,postId,commentId) {
+  newLikeMemeLiked(memeId, postId, commentId) {
     this.likeService
-    .newLike(memeId,postId,commentId)
+    .newLike(memeId, postId, commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
         this.fetchLikedMemes();
     });
   }
 
-  dislikeMemeLiked(memeId,postId,commentId) {
+  dislikeMemeLiked(memeId, postId, commentId) {
     this.likeService
-    .dislike(memeId,postId,commentId)
+    .dislike(memeId, postId, commentId)
     .subscribe((data: Meme ) => {
         this.meme = data;
         this.fetchLikedMemes();
     });
- 
   }
 
   fetchMemesLikesAndComments(userId) {
@@ -184,7 +182,7 @@ export class ProfilComponent implements OnInit {
   fetchLikedMemes() {
     this.memeService
     .getMemesLikesAndCommentsForProfil(this.userFetch.userId)
-    .subscribe((data: Meme[] ) =>{
+    .subscribe((data: Meme[] ) => {
         this.memes = data;
     });
 }

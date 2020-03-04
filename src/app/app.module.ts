@@ -29,6 +29,7 @@ import { ProfilComponent } from './components/profil/profil.component';
 import { MemeComponent } from './components/meme/meme.component';
 import { NotificationService } from './services/notification.service';
 import { ComponentCommunicationService } from './services/component-communication.service';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 const routes: Routes = [
@@ -56,6 +57,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    NgxDropzoneModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     MatToolbarModule,
