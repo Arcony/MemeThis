@@ -57,7 +57,7 @@ export class CanvasComponent implements AfterViewInit {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     const canvas = new Image();
     canvas.crossOrigin = 'anonymous';
-    canvas.src = 'http://127.0.0.1:8887/' + this.postContent;
+    canvas.src = 'http://192.168.79.29:8887/' + this.postContent;
 
     canvas.onload = () => {
       const iw = canvas.width;
@@ -98,7 +98,7 @@ export class CanvasComponent implements AfterViewInit {
     this.cx.strokeStyle = '#000';
     const canvas = new Image();
     canvas.crossOrigin = 'anonymous';
-    canvas.src = 'http://127.0.0.1:8887/' + this.postContent;
+    canvas.src = 'http://192.168.79.29:8887/' + this.postContent;
     canvas.onload = () => {
       const iw = canvas.width;
       const ih = canvas.height;

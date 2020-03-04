@@ -4,7 +4,7 @@
     </div>
         <div class="card-body text-white">
             <div class="row">
-              <div class="col-md-6"> <p>Avatar</p> <img class="img-responsive img" [src] = "'http://127.0.0.1:8887' + userFetch?.picture"></div>
+              <div class="col-md-6"> <p>Avatar</p> <img class="img-responsive img" [src] = "'http://192.168.79.29:8887' + userFetch?.picture"></div>
               <div class="col-md-6"> Informations 
                   <form class="form-group margin-top" >
                       <input type="text" #oldPassword id="oldPassword" class="fadeIn second" name="oldPassword" placeholder="Old password">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="card-body">
                                 <a class="title" routerLink="/post/{{item._id}}">
-                                <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+                                <img class="img-responsive" [src] = "'http://192.168.79.29:8887' + item.content">
                                 </a>
                         </div>
                         <div class="card-footer bg-dark text-muted text-white">
@@ -53,7 +53,7 @@
                           <a class="title" routerLink="/meme/{{item._id}}">{{item.title}} </a>
                         </div>
                         <div class="card-body">
-                          <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+                          <img class="img-responsive" [src] = "'http://192.168.79.29:8887' + item.content">
                         </div>
                         <div class="card-footer nobordertop bg-dark text-white row">
                             <div class="col-md-6 card double-btn-footer text-center bg-dark">
@@ -78,7 +78,7 @@
                           <a class="title" routerLink="/meme/{{item._id}}">{{item.title}} </a>
                         </div>
                         <div class="card-body">
-                          <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + item.content">
+                          <img class="img-responsive" [src] = "'http://192.168.79.29:8887' + item.content">
                         </div>
                         <div class="card-footer nobordertop bg-dark text-muted text-white row">
                             <div class="col-md-6 card double-btn-footer text-center bg-dark">

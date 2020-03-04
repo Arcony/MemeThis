@@ -3,11 +3,11 @@
     <p class="title">{{meme?.title}} </p>
   </div>
   <div class="card-body v">
-    <img class="img-responsive" [src] = "'http://127.0.0.1:8887' + meme?.content">
+    <img class="img-responsive" [src] = "'http://192.168.79.29:8887' + meme?.content">
   </div>
   <div class="card-footer bg-dark text-muted text-white">
     <div class="media">
-      <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + userConnected?.picture"/>
+      <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" [src] = "'http://192.168.79.29:8887' + userConnected?.picture"/>
       <div class="media-body">
         <div class="form-group basic-textarea rounded-corners">
           <textarea name="message"   [(ngModel)]="message" (ngModelChange)="message = $event" class="form-control z-depth-1" id="commentaire" rows="3" placeholder="Write your comment..."></textarea>
@@ -25,7 +25,7 @@
     <div *ngFor="let item of comments, let i = index">
             <div class="card-header bg-dark text-white">
                 <div class="media">
-                    <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + item?.userAvatar"/>
+                    <img class="d-flex rounded-circle avatar z-depth-1-half mr-3" [src] = "'http://192.168.79.29:8887' + item?.userAvatar"/>
                     <div class="media-body">
                         <h6 class="text-left pull-left">{{item.username}}</h6>
                         <p class="text-left"> {{item.text}}</p>
@@ -37,7 +37,7 @@
                 <div *ngIf="seeResponse == i">
                 <div *ngFor="let response of item.subComments" class="media media-response shadow-textarea margin-left response">
                       
-                  <img class="d-flex rounded-circle avatar-response z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + response?.userAvatar">
+                  <img class="d-flex rounded-circle avatar-response z-depth-1-half mr-3" [src] = "'http://192.168.79.29:8887' + response?.userAvatar">
                       <div class="media-body">
                         <h6 class="text-left pull-left">{{response.username}}</h6>
                         <p class="text-left"> {{response.text}}</p>
@@ -47,7 +47,7 @@
                 </div>
               </div>
                 <div *ngIf="replyActivate == i" class="media  media-response response">
-                    <img class="d-flex rounded-circle avatar-response z-depth-1-half mr-3" [src] = "'http://127.0.0.1:8887' + userConnected?.picture"/>
+                    <img class="d-flex rounded-circle avatar-response z-depth-1-half mr-3" [src] = "'http://192.168.79.29:8887' + userConnected?.picture"/>
                     <div class="media-body">
                       <div class="form-group basic-textarea rounded-corners">
                         <textarea name="reply"   [(ngModel)]="reply" (ngModelChange)="reply = $event" class="form-control z-depth-1" id="commentaire" rows="3" placeholder="Write your comment..."></textarea>
