@@ -5,9 +5,9 @@
       <div class="fadeIn first">
       </div>
         <form [formGroup]="createForm" >
-          <input type="text" #email id="email" formControlName="email" class="fadeIn second mt-5" name="email" placeholder="email"  oninput="this.value = this.value.toLowerCase()">
+          <input type="text" #username id="username" formControlName="username" class="fadeIn second mt-5" name="username" placeholder="username"  oninput="this.value = this.value.toLowerCase()">
           <input type="password" #password id="password" formControlName="password" class="fadeIn third" name="password" placeholder="password">
-          <input type="submit" class="fadeIn fourth" value="Log In" (click)="signIn(email.value, password.value)">
+          <input type="submit" class="fadeIn fourth" value="Log In" (click)="signIn(username.value, password.value)">
 
         </form>
         <p class="error-txt" *ngIf="error"> {{error}} </p>

@@ -10,10 +10,10 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   // Method to Login
-  login (email, password) {
+  login (username, password) {
 
     const user =  {
-      email: email,
+      username: username,
       password: password,
     };
     return this.http.post( SERVER_API_URL + '/login', user);
